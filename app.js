@@ -66,7 +66,6 @@ function addNewComment(post_id , user_name , text){
       }
     )
   }).then(()=> console.log("done"))
-
 }
 
 
@@ -108,7 +107,7 @@ db.collection("posts").get().then((snapshot) => {
 //setNewPost("https://s.ftcdn.net/v2013/pics/all/curated/RKyaEDwp8J7JKeZWQPuOVWvkUjGQfpCx_cover_580.jpg?r=1a0fc22192d0c808b8bb2b9bcfbf4a45b1793687","A text editor is a type of computer program that edits plain text. Such programs are sometimes known as  software, following the naming of Microsoft ...")
 
 
-
+/*
 db.collection("posts").doc("EEjdmoOPlOfcyryBVaSO").get().then(( doc )=>{
   
 
@@ -117,7 +116,7 @@ db.collection("posts").doc("EEjdmoOPlOfcyryBVaSO").get().then(( doc )=>{
       
     })
 })
-
+*/
 
 /*
 usersTabel.set({
