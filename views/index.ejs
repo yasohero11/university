@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../public/styles/comments.css">
+<script src="https://kit.fontawesome.com/1b6dbc5d1f.js"></script>
+<div class="container-fluid padding">
+    <style>
+        .news a {
+            background-color: #f5f8fa;
+        }
+        
+        .news a:hover {
+            background-color: #cacfd3;
+        }
+    </style>
+    <div class="row">
+        <%- include( 'includes/_navbar') %>
+
+            <section class=" col-sm-11 col-md-5">
+
+                <% for (let doc of docs) { %>
+                    <div class="card" style="width:100%; margin-bottom: 20px;">
+                        <div class="m-2">
+                            <img style="width: 50px; height: 50px;" src="<%=doc.data().imagePath%>">
+                            <span><%=doc.data().date%></span>
+                        </div>
+                        <img class="card-img-top" src="<%=doc.data().imagePath%>" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <%=doc.data().title%>
+                            </h4>
+                            <p class="card-text">
+                                <%=doc.data().text%>
+                            </p>
+                            <div class="comments-area border">
+                                <h4 class="p-2"> Comments</h4>
+                                <% if (doc.data().comments.length != 0) { %>
+                                <% for (comment of doc.data().comments) { %>
+                                <div class="comment">
+                                    <div class=" media  p-3">
+                                        <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">
+                                        <div class="media-body">
+                                          <h6><%=comment.user_name%> <small><i>Posted on <%=comment.date%></i></small></h6>
+                                          <p><%=comment.text%></p>
+                                        </div>
+                                      </div>
+                                      <!--
+                                      <% if(doc.data().comments.replys.length != 0) { %>
+                                            <% for (reply of doc.data().comments.replys) { %>
+                                                <div class=" sub-comment media  p-3" >
+                                                    <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">
+                                                    <div class="media-body">
+                                                      <h6><%=reply.user_name%> <small><i>Posted on <%=reply.date%></i></small></h6>
+                                                      <p><%=reply.text%></p>
+                                                    </div>
+                                                  </div>
+                                            <%}%>
+                                      <%}%>
+                                      -->
+                                      <div style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;"><a href="#" class="p-1">Replay</a></div>
+                                      
+                                </div>
+                                <%}%>
+                                <%}%>
+
+                                <hr>
+                                <form>
+                                    <input type="text" placeholder="Write your comment here ..." style="padding-left: 10px;">
+                                </form>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <%}%>
+
+            </section>
+            <section class="news col-sm-12 col-md-4">
+                <div class="container">
+                    <h2 style="color: black;">News</h2>
+                    <div class="list-group">
+
+                      
+                      <% for (news of allNews) {%>
+                        <a href="#" class="list-group-item list-group-item-action">
+                          <%=news.data().content%>
+                            </a>
+                    <%}%>
+
+
+                        <a id="show-more" style=" color:lightseagreen; visibility: hidden;" href="#" class="list-group-item list-group-item-action">Show more</a>
+                    </div>
+                </div>
+            </section>
+
+
+    </div>
+</div>
+
+<script>
+    var news = document.getElementsByClassName("numnews")
+    if (news.length >= 7) {
+        document.getElementById("show-more").style.visibility = "visible";
+    }
+</script>
+
+<!--
+     <div class="comment">
+                            <div class=" media  p-3">
+                                <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">
+                                <div class="media-body">
+                                  <h6>John Doe <small><i>Posted on February 19, 2016</i></small></h6>
+                                  <p>Lorem ipsum...</p>
+                                </div>
+                              </div>
+                              <div class=" sub-comment media  p-3" >
+                                <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">
+                                <div class="media-body">
+                                  <h6>John Doe <small><i>Posted on February 19, 2016</i></small></h6>
+                                  <p>sub comment</p>
+                                </div>
+                              </div>
+                              <div class=" sub-comment media  p-3" >
+                                <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">
+                                <div class="media-body">
+                                  <h6>John Doe <small><i>Posted on February 19, 2016</i></small></h6>
+                                  <p>sub comment</p>
+                                </div>
+                              </div>
+                              <div style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;"><a href="#" class="p-1">Replay</a></div>
+                              
+                        </div>
+-->
