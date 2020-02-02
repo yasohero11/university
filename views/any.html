@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../public/styles/index.css">
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    
+        <nav id="mynav" class="navbar navbar-expand-md bg-white navbar-light ">
+            <div class="container">
+                <a class="navbar-brand " id="show-on-col" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgSGlbBKEoANTc10zgf93S957hwYB3vpbwC-0aslgB-X6jZ79V"></a>
+          
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse" id="collapsibleNavbar" style="justify-content: center;">
+                  <ul class="navbar-nav " >
+                    <li class="nav-item nav-it">
+                      <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item nav-it">
+                      <a class="nav-link" href="#">Faculties</a>
+                    </li>
+                    <li class="nav-item nav-it">
+                        <a class="nav-link" href="#">Student Activites</a>
+                      </li>
+                    
+                    <li class="nav-item" id="hide-on-col">
+                      <a class=" navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgSGlbBKEoANTc10zgf93S957hwYB3vpbwC-0aslgB-X6jZ79V"></a>
+                    </li>
+                    <li class="nav-item nav-it">
+                        <a class="nav-link" href="#">Partnership</a>
+                      </li>
+                    <li class="nav-item nav-it">
+                        <a class="nav-link" href="#">About Us</a>
+                      </li>
+                      <li class="nav-item nav-it">
+                        <a class="nav-link" href="#">Contact Us</a>
+                      </li>
+                    
+                  </ul>
+                </div>
+            </div>
+            <!-- Brand -->
+          
+          </nav>
+
+          <div class="container-fluid" id="education">
+              <div class="col-md-12">
+                <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSp8s7XxE5s-UHeGw0EKZnY9KL8W-EP9JtRFnbo6BjwuH44R2tZ">
+              </div>
+              <div class="container" >
+                    <h4>BEST EDUCATION SERVICE IN THE EGYPT</h4>
+                    <h2 class="display-4">ONE STEP AHEAD THIS SEASON</h2>
+                    <button id="learn-more" type="button" class="btn btn-outline-success">LERN MORE</button> 
+                    <button id="fu" type="button" class="btn btn-default">FACULTIES</button>
+                    
+                    
+              </div>
+              
+          </div>
+    
+    
+<script>
+     $(document).ready(() =>{
+         
+        $(window).resize(function() {
+            if(($(window).width() <= 766)){
+                  $("#show-on-col").show();
+                  $("#hide-on-col").hide();
+            }else{
+                $("#show-on-col").hide();
+                  $("#hide-on-col").show();
+            }
+        });
+            
+            $(window).scroll(()=>{
+                if($(window).scrollTop() > 50){
+                    $("#mynav").addClass("sticky-top")
+                }else{
+                    $("#mynav").removeClass("sticky-top")
+                }
+                
+            })
+            
+               
+       
+     })
+     
+        
+</script>
+    
+</body>
+</html>

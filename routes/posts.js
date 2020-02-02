@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
                 console.log("news " + doc.data())
             });
             */
-            res.render("index", { docs: docs, allNews : news });
+            res.render("posts", { docs: docs, allNews : news });
         })  
     }) 
 })

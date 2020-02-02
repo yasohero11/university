@@ -25,7 +25,7 @@
     <div class="row">
         <%- include( 'includes/_navbar') %>
 
-            <section class=" col-sm-11 col-md-5">
+            <section class=" col-sm-11 col-md-6 p-5">
 
                 <% for (let doc of docs) { %>
                     <div class="card" style="width:100%; margin-bottom: 20px;">
@@ -41,7 +41,7 @@
                             <p class="card-text">
                                 <%=doc.data().text%>
                             </p>
-                            <div class="comments-area border" >
+                            <div class="comments-area border m-5" >
                                 <div class="comments" id="<%= doc.id%>">
                                 <h4 class="p-2"> Comments</h4>
                                 <% if (doc.data().comments.length != 0) { %>
@@ -77,7 +77,7 @@
                     <%}%>
 
             </section>
-            <section class="news col-sm-12 col-md-4">
+            <section class="news col-sm-12 col-lg-3">
                 <div class="container">
                     <h2 style="color: black;">News</h2>
                     <div class="list-group">
