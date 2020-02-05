@@ -1,0 +1,84 @@
+
+.coursal-item a{
+    background-color: #002347;
+    color: #fdc632;
+    width: 150px;
+    padding: 10px 12px;
+    border-radius: 25px;  
+    margin-top: 50px;
+    margin-bottom: 20px;  
+}
+.coursal-item a:hover{
+    color: #fdc632;
+    
+}
+
+
+.coursal-controller a{
+    background-color: #002347;  
+    padding: 9px;
+    margin-left: 15px;
+    border-radius: 100%; 
+     
+}
+.coursal-controller{
+    padding-left: 5px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+.coursal-controller i{
+    color: #fdc632;
+}
+.my-coursal{
+    
+    overflow: hidden;
+    
+    
+}
+#news{
+    background: linear-gradient(to right, #ff4b2b,#ff416c);;
+}
+
+#news p{
+    color: aliceblue;
+}
+
+@keyframes item-content{
+    from{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to{
+        opacity: 1;
+        transform: none;
+    }
+}
+@keyframes item-image{
+    from{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to{
+        opacity: 1;
+        transform: none;
+    }
+}
+
+
+.active .item-content{
+    animation-duration: 1.4s;
+    animation-name: item-content;
+    animation-fill-mode: both;
+   
+}
+.active .item-image{
+    animation-duration: 1.6s;
+    animation-name: item-image;
+    animation-fill-mode: both;
+}
+.active .item-content a{
+    animation-duration: .8s;
+    animation-name: item-content;
+    animation-fill-mode: both;
+    
+}

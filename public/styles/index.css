@@ -52,7 +52,6 @@ nav .nav-it{
     margin-left: 10px;
     margin-right: 10px;
     padding-top: 7px;
-    
     box-sizing: border-box;
 }
 nav .nav-it a{
@@ -80,10 +79,12 @@ nav .nav-it a{
 }
 #learn-more , #fu{
     transition: 0.3s;
+    font-weight: 500;
     padding: 10px;
 }
 #learn-more{
     background-color: #28a745;
+    border:1.5px solid #28a745;
     color: white;
     
 }
@@ -98,26 +99,143 @@ nav .nav-it a{
 }
 
 #learn-more:hover{
-    background-color: white;
+    background-color: transparent;
     color:#28a745 ;
 }
 
 
 #fu{
     background-color: #002347;
-    color: #fdc632;;  
+    color: #fdc632;  
 }
 #fu:hover{
     background-color: #28a745;
     color: white; 
 }
 
-#education h4,h2{
+h4,h2,h2,h1,h3, i{
     color: #002347;
+}
+
+#feature-text{
+    text-align: center;
+    display: block;
+}
+ p{
+    color: #7b838a;
+    font-size: 20px;
+ }
+#feature-text p{
+    font-style: italic;
+    font-weight: 400;    
+}
+.feature i{
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.feature{
+    margin-top: 50px;
+    background-color: rgb(248, 247, 247);
+    transition: 0.5s;
     
+}
+.feature:hover{
+    box-shadow: 0 0 10px rgb(0,0,0,0.5);
+}
+.feature p {
+    font-size: 18px;
+}
+.feature h4{
+    padding: 0px;
+    margin: 0px;
+}
+.card-head{
+    overflow: hidden;
+}
+
+.card-img-top{
+    height: 300px;
+    
+    transition: 0.5s;
+}
+.card{
+    position: relative;
+    margin: 20px;
+    transition: 0.5s;
+}
+.card p:first-child{
+ position: absolute;
+ background-color: #fdc632;
+ color: #002347;
+ width: 70px;
+ height: 70px;
+ padding-top: 12px;
+ text-align: center;
+ border-radius: 100%;
+ font-size: 30px;
+ font-family: 'Anton';
+ top: 260px;
+ right: 20px;
+ z-index: 1;
+ transition: 0.3s;
+}
+.card h4{
+    color: #002347;
+    transition: 0.3s;
+}
+.card:hover h4{
+    color: #fdc632;
+}
+.card:hover .card-img-top{
+    transform: scale(1.5);     
+}
+
+.card:hover p:first-child{
+    background-color: #002347;
+    color: #fdc632;
+}
+
+.card a{
+    border-radius:0px ;
+    color: aliceblue;
+    background: #002347;
+}
+.card a:hover{
+ color: #fdc632;
+}
+.card:hover{
+    -moz-box-shadow: 0 0 10px rgb(0,0,0,0.35);
+    -webkit-box-shadow: 0 0 10px rgb(0,0,0,0.35);
+    box-shadow: 0 0 10px rgb(0,0,0,0.5);
 }
 
 
+@media(max-width : 1162px){
+    nav .container{
+        font-size: 15px;
+    }
+    .navbar-brand img{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    nav .nav-it{
+        margin-left: 0px;
+        margin-right: 5px;
+        box-sizing: border-box;
+    }
+}
+
+
+
+@media(max-width : 1040px){
+ .display-1{
+     font-size: 60px;
+ }
+}
+
+/*
 @media(max-width : 1091px){
     #education .display-4{
         font-size: 50px;
@@ -137,8 +255,10 @@ nav .nav-it a{
     }
     
 }
+*/
 
-@media(max-width : 577px){
+
+@media(max-width : 768px){
     #education .container{
         top: 50%;
         background: none;
@@ -150,11 +270,36 @@ nav .nav-it a{
     #education h4,h2{
         color: black;
     }
+   
+    #education img{
+        width: 100%;
+        height: 200px;
+    }
+}
+@media(max-width: 487px){
+    #education .display-1{
+        font-size: 50px;
+    }
 }
 
-@media(max-width : 1162px){
-    nav .container{
+@media(max-width : 811px){
+    #education .display-1{
+        font-size: 40px;
+        
+    }
+    #education h4{
         font-size: 15px;
     }
 }
+
+@media(max-width : 330px){
+    #education .display-1{
+        font-size: 30px;
+        
+    }
+    #education h4{
+        font-size: 15px;
+    }
+}
+
 
