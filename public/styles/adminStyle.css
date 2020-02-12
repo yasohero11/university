@@ -1,0 +1,33 @@
+#main{
+ width: 500px;
+ margin: auto;
+ border-radius: 5px;
+ box-shadow: 0 0 10px rgb(0,0,0,0.5);
+ padding: 10px;
+}
+
+.flip{
+    box-shadow: 0 0 10px rgb(0,0,0,0.2);
+    padding-left: 30px;
+    padding-top: 2px;
+    height: 30px;
+}
+.content , .flip{
+    width: 500px;
+    margin: auto;
+    box-shadow: 0 0 10px rgb(0,0,0,0.2);
+
+}
+.content{
+    padding: 10px;
+    margin-top: 5px;
+}
+.flip i{
+    float: right;
+    padding: 5px;
+    padding-right: 10px;
+}
+
+.flip i:first-child{
+    display: none;
+}

@@ -3,7 +3,7 @@ const router = express.Router();
 var admin = require("firebase-admin");
 
 const db = admin.firestore();
-router.get("/", (req, res) => {
+router.get("/posts", (req, res) => {
   
     db.collection("posts").get().then((snapshot) => {
          docs = snapshot.docs

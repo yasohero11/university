@@ -1,0 +1,145 @@
+<%- include( 'includes/_navbar') %>
+
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+<link rel="stylesheet" href="../public/styles/adminStyle.css">
+
+
+
+<div class="flip" id="news">Click to slide the panel down or up <i class="fas fa-minus"></i><i class="fas fa-plus"></i>
+</div>
+<div class="content" id="news-admin">
+    <label for="news-selector">Select list:</label>
+    <select class="form-control" id="news-selector">
+        <option>none</option>
+    </select>
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" id="title">
+    <label for="imageUrl">Image Url</label>
+    <input type="text" class="form-control" id="imageUrl">
+    <label for="text">Text</label>
+    <textarea class="form-control" rows="5" id="text"></textarea>
+    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary">Save Edit</button>
+</div>
+
+
+
+
+
+
+
+<script>
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
+        authDomain: "university-45734.firebaseapp.com",
+        databaseURL: "https://university-45734.firebaseio.com",
+        projectId: "university-45734",
+        storageBucket: "university-45734.appspot.com",
+        messagingSenderId: "694823147172",
+        appId: "1:694823147172:web:970f883121c3e21ba3f831",
+        measurementId: "G-F24T378RP7"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var db = firebase.firestore();
+
+    function getTime(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ampm;
+        return strTime;
+    }
+
+    function getCurrentDate(date) {
+        var today = (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear();
+        return today;
+    }
+
+
+
+
+    $(document).ready(function () {
+        function addNews() {
+            var date = new Date();
+
+            var dateTime = getCurrentDate(date) + ' ' + getTime(date);
+            let news = $("#news-admin");
+            
+            db.collection('news').add({
+                date: dateTime,
+                title: news.children("#title").val(),
+                text: news.children("#text").val(),
+                imagePath: news.children("#imageUrl").val(),
+            }).then((doc) => {
+                console.log(doc.id + " a news been added to the database")
+            })
+        }
+
+        function addSlider(sliderId, conetentId) {
+            let isOpen = false;
+            $(conetentId).css("display", "none");
+            $(sliderId).click(function () {
+
+                $(conetentId).slideToggle(500, () => {
+                    if (isOpen) {
+                        $(this).children("i:last").css("display", "flex")
+                        $(this).children("i:first").css("display", "none")
+                        isOpen = false;
+                    } else {
+                        $(this).children("i:first").css("display", "flex")
+                        $(this).children("i:last").css("display", "none")
+                        isOpen = true
+                    }
+                });
+
+            });
+        }
+
+        function addFormEvent(conentId, fun) {
+            $(conentId).children("button").click(() => {
+                console.log("ennnand")
+                fun()
+            })
+        }
+
+       
+        addSlider("#news", "#news-admin");
+        addFormEvent("#news-admin", addNews)
+        db.collection("news").onSnapshot(function (snapshot) {
+                let selector = $("#news-selector")
+            snapshot.docChanges().forEach(function (change) {
+                if(change.type === "added") {
+                    selector.append("<option value = "+ change.doc.id +"> Title : "+ change.doc.data().title + " || Date : " + change.doc.data().date+" </option>")
+                }
+            });
+        });
+
+        $('#news-selector').change(()=>{
+            let news = $("#news-admin");
+            db.collection("news").doc($('#news-selector').find(":selected").val()).get().then((doc)=>{
+                news.children("#title").val(doc.data().title)
+                news.children("#imageUrl").val(doc.data().imagePath)
+                news.children("#text").val(doc.data().text)
+                
+            })
+        });
+        
+
+
+
+    });
+
+
+</script>

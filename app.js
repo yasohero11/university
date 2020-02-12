@@ -10,17 +10,25 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://university-45734.firebaseio.com"
 });
-
+const db = admin.firestore();
 app.use(express.static(path.join(__dirname, 'public/assets')))
 app.use(express.static(path.join(__dirname)))
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(require("./routes/index"));
 app.use(require("./routes/posts"));
+app.use(require("./routes/admin"));
 
+/*  access a subcollection
+db.collection("posts").doc("EEjdmoOPlOfcyryBVaSO").collection('comments').get().then((doc)=>{
+    doc.docs.forEach(doc =>{
+        console.log(doc.data())
+    })
+})
 
-const db = admin.firestore();
-
+*/
+/*
 function getTime(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -88,7 +96,7 @@ function addNewReply(post_id, comment_id , user_name , text){
 
 
 }
-
+*/
 /*
 let museums = db.collectionGroup('comments').where('comment_id', '==', '1');
 museums.get().then(function(querySnapshot) {

@@ -1,0 +1,310 @@
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+  
+  
+  
+  
+
+  <%- include( 'includes/_navbar') %>
+    
+
+  <link rel="stylesheet" href="../public/styles/index.css">
+  <link rel="stylesheet" href="../public/styles/coursal.css">
+  <link rel="stylesheet" href="../public/styles/facultiesCards.css">
+ 
+
+  <div class="container-fluid" id="education">
+    <div class="col-md-12">
+      <img class="img-fluid"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSp8s7XxE5s-UHeGw0EKZnY9KL8W-EP9JtRFnbo6BjwuH44R2tZ">
+    </div>
+    <div class="container">
+      <h4>BEST EDUCATION SERVICE IN THE EGYPT</h4>
+      <h2 class="display-1">ONE STEP AHEAD THIS SEASON</h2>
+      <button id="learn-more" type="button" class="btn btn-outline-success">LERN MORE</button>
+      <button id="fu" type="button" class="btn btn-default">FACULTIES</button>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 20px;">
+    <div class="row" id="feature-text">
+      <h2 class="display-4">Awesome Feature</h2>
+      <P class="p-1">Replenish man have thing gathering lights yielding shall you</P>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6">
+        <div class="feature p-3">
+          <i class="fas fa-university"></i>
+          <h4>Scholarship Facility</h4>
+          <p>One make creepeth, man bearing theira firmament won't great heaven</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="feature p-3">
+          <i class="fas fa-book"></i>
+          <h4>Provide Course</h4>
+          <p>One make creepeth, man bearing theira firmament won't great heaven</p>
+        </div>
+      </div>
+
+      <div class="col-sm-12  col-lg-4  ">
+        <div class="feature p-3">
+          <i class="fas fa-globe-europe"></i>
+          <h4>Global Certification</h4>
+          <p>One make creepeth, man bearing theira firmament won't great heaven</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container faculties">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-sm-9" style="width: 100%;">
+        <div class="card">
+          <p>12</p>
+          <div class="card-head">
+            <img src="https://giu-uni.de//img/content/academic-specializations/informatics/software-engineering.jpg"
+              class="card-img-top" alt="...">
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Computer Science</h4>
+            <p class="card-text">Computer science (sometimes called computation science) is the study of processes that
+              interact with data and that can be represented .</p>
+            <a href="#" class="btn btn-default">READ MORE</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4  col-sm-9" style="width: 100%;">
+        <div class="card">
+          <p>22</p>
+          <div class="card-head">
+            <img src="https://www.staffordglobal.org/wp-content/uploads/2019/10/mba-top-up.jpg" class="card-img-top"
+              alt="...">
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Business Administration</h4>
+            <p class="card-text">The Higher Certificate in Business Management (HCIBM) is a 1 year programme that
+              provides an overview of the essentials of business management theory and practice. It is designed to
+              provide a convenient and appropriate avenue into business management studies.</p>
+            <a href="#" class="btn btn-default">READ MORE</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-9" style="width: 100%;">
+        <div class="card">
+          <p>17</p>
+          <div class="card-head">
+            <img
+              src="https://udemycoupons.me/wp-content/uploads/2020/01/Information-Technology-101-Udemy-Coupon-Free-Udemy-Coupon-Free.jpg"
+              class="card-img-top" alt="...">
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Computer Science</h4>
+            <p class="card-text">information technology (IT) is basically synonymous with the guys and gals you call
+              when you need help with a computer issue. While that view of information technology isn’t totally wrong,
+              it drastically understates the scope of this critical career field.</p>
+            <a href="#" class="btn btn-default">READ MORE</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="container" style="margin-top: 50px;" id="news" >
+    <div class="row justify-content-center" id="news-head">
+      <h2>LATEST NEWS</h2>
+      <p style="margin-top: 5px;">Find out the latest news</p>
+    </div>
+
+    <div class="container my-coursal">
+      
+      <% for (let singelNews of news) { %>
+        <div class="row coursal-item">
+          <div class="col-lg-6  item-content">
+            <h3><%= singelNews.data().title %> <i><%= singelNews.data().date %></i></h3>
+            <P><%= singelNews.data().text %></P>
+            
+            <a href="<%= singelNews.id %>" class="btn btn-default">READ MORE</a>
+          </div>
+
+          <div class="col-lg-6 item-image">
+            <img class="img-fluid " src="<%= singelNews.data().imagePath %>">
+          </div>
+        </div>
+
+       <% } %>
+      <div class="row coursal-controller">
+        <a id="goBack" class="btn btn-default"><i class="fas fa-long-arrow-alt-left"></i></a>
+        <a id="goNext" class="btn btn-default"><i class="fas fa-long-arrow-alt-right"></i></a>
+      </div>
+
+    </div>
+
+
+  </div>
+  
+  
+  <div class="container ">
+    <div class="row">
+      <% for (let professor of professors) { %>
+          <div class="professor" style="border-top: 10px solid <%= 'rgb(' + (Math.floor((Math.random() * 253) + 1)) +','+ (Math.floor((Math.random() * 253) + 1))+ ','+ (Math.floor((Math.random() * 253) + 1)) +')' %>;">
+            <img src="<%= professor.data().imageUrl %>">
+              <h6><%= professor.data().name %></h6>
+              <hr>
+              <p><%= professor.data().description %></p>
+              <div class="societal">
+                <a href="<%= professor.data().twitter %>"><i class="fab fa-twitter"></i></a>
+                <a href="<%= professor.data().mail %>"><i class="fas fa-paper-plane"></i></a>
+                <a href="<%= professor.data().linkedin %>"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+          </div>
+      <% } %>
+
+    </div>
+
+</div>
+
+<div class="container partners">
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+        <h2>Success Partners</h2>
+    </div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="https://lh3.googleusercontent.com/proxy/FYwWTBrC4uSpvSe0TORgjGwgqGN5Nrs0w8sb2rj1aMelzLGrCBIm62pDnuuCWkYAXnIF_nLX5Uhd4Js6u9mZdsmnR-bWv8i0YRQwZ-jWiqKlnpPFGxqxN9fINoX6rcPEa7Ma77vEwS6DRevk7aLWw5UBuOagbnc" alt="">
+    </div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="https://i1.rgstatic.net/ii/institution.image/AS%3A267464833732608%401440779993119_l" alt="">
+    </div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ7CWLTPvyfp661dZiq7wXOz4Tv90nLW1P9-QBHLIpM-rcysHwA" alt="">
+    </div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/en/0/0f/Widener_University_Seal.png" alt="">
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="https://pbs.twimg.com/profile_images/1075055296630964225/dzS7Jbpz_400x400.jpg" alt="">
+    </div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="https://images.youracclaim.com/images/4af98afb-e325-490a-a4dd-305f7cbdb9ee/Exam-778-UPDATED.png" alt="">
+    </div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="data:image/jpeg;base64,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" alt="">
+    </div>
+    <div class="col-md-2 col-sm-9">
+      <img class="img-fluid" src="data:image/png;base64,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" alt="">
+    </div>
+  </div>
+
+</div>
+
+
+<!--
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    -->
+  <script>
+    $(document).ready(() => {
+
+        
+        var coursalItems = $(".coursal-item");
+        var currentPage = 0;
+        
+         if($(".coursal-item.active").length != 0){
+            for(let i  = 0 ; i < coursalItems.length; i++){
+              element = coursalItems[i];
+             if(!element.classList.contains("active")){
+                element.style.display = 'none'
+              }
+              else
+                currentPage = i;              
+            }
+          }else{
+            for( element of coursalItems){
+                element.style.display = 'none'
+            }
+            coursalItems[0].style.display = 'flex'
+          }
+        
+
+        function next(){
+          if(currentPage+1 == coursalItems.length){
+            
+            switchPages(currentPage , 0);
+            currentPage = 0;
+          }else{
+            
+            switchPages(currentPage,++currentPage)
+            
+          }
+        }
+
+        function back(){
+          if(currentPage == 0){
+            
+            switchPages(0 , coursalItems.length-1);
+            currentPage = coursalItems.length-1;
+          }else  
+            switchPages(currentPage,--currentPage)
+        }
+
+        function switchPages(currentIndex , nextIndex){
+          let current_page = coursalItems[currentIndex];
+          let next_page = coursalItems[nextIndex];
+          current_page.style.display = 'none';
+          current_page.classList.remove("active")
+          next_page.style.display = 'flex';
+          next_page.classList.add("active")
+        }
+/*
+        document.getElementsByClassName("my-coursal")[0].addEventListener("mouseover" , ()=>{
+              console.log("em")
+        })
+*/
+       var coursalInterval = setInterval(()=>next(),3000)
+       coursalInterval;
+
+      $(".my-coursal").mouseenter(()=>{
+        console.log("enter")
+        clearInterval(coursalInterval)
+      })
+
+      $(".my-coursal").mouseleave(()=>{
+        console.log("leave")
+        coursalInterval = setInterval(()=>next(),3000)
+        coursalInterval;
+      })
+
+      
+       /*
+        $(".item-image").hover(function(){
+          clearInterval(coursalInterval)
+        })
+        */
+        $("#goNext").click(()=> next())
+        $("#goBack").click(()=> back())
+        
+
+    })
+
+
+  </script>
+ 

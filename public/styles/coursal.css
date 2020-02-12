@@ -29,6 +29,11 @@
 .coursal-controller i{
     color: #fdc632;
 }
+.coursal-item h3 i{
+    font-size: 17px;
+    color: #bbb6b6;
+}
+
 .my-coursal{
     
     overflow: hidden;
@@ -77,8 +82,15 @@
     animation-fill-mode: both;
 }
 .active .item-content a{
-    animation-duration: .8s;
+    animation-delay: 0.2s;
+    animation-duration: 1.4s;
     animation-name: item-content;
-    animation-fill-mode: both;
-    
+    animation-fill-mode: both;   
+}
+
+@media(max-width:975px){
+    .item-image {
+        text-align: center;
+        
+    }
 }
