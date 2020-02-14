@@ -15,16 +15,16 @@
 <div class="content" id="news-admin">
     <label for="news-selector">Select list:</label>
     <select class="form-control" id="news-selector">
-        <option>none</option>
+        <option value="none">none</option>
     </select>
     <label for="title">Title:</label>
     <input type="text" class="form-control" id="title">
     <label for="imageUrl">Image Url</label>
     <input type="text" class="form-control" id="imageUrl">
     <label for="text">Text</label>
-    <textarea class="form-control" rows="5" id="text"></textarea>
+    <textarea style="margin-bottom: 10px;" class="form-control" rows="5" id="text"></textarea>
     <button class="btn btn-primary">Submit</button>
-    <button class="btn btn-primary">Save Edit</button>
+    <button  class="btn btn-primary">Save Edit</button>
 </div>
 
 
@@ -117,8 +117,9 @@
        
         addSlider("#news", "#news-admin");
         addFormEvent("#news-admin", addNews)
+
         db.collection("news").onSnapshot(function (snapshot) {
-                let selector = $("#news-selector")
+            let selector = $("#news-selector")
             snapshot.docChanges().forEach(function (change) {
                 if(change.type === "added") {
                     selector.append("<option value = "+ change.doc.id +"> Title : "+ change.doc.data().title + " || Date : " + change.doc.data().date+" </option>")
@@ -128,12 +129,17 @@
 
         $('#news-selector').change(()=>{
             let news = $("#news-admin");
-            db.collection("news").doc($('#news-selector').find(":selected").val()).get().then((doc)=>{
-                news.children("#title").val(doc.data().title)
-                news.children("#imageUrl").val(doc.data().imagePath)
-                news.children("#text").val(doc.data().text)
-                
-            })
+         
+            
+            if($('#news-selector').children("option:selected").val() != "none"){
+                db.collection("news").doc($('#news-selector').find(":selected").val()).get().then((doc)=>{
+                    news.children("#title").val(doc.data().title)
+                    news.children("#imageUrl").val(doc.data().imagePath)
+                    news.children("#text").val(doc.data().text)
+                    
+                })
+            }
+            
         });
         
 

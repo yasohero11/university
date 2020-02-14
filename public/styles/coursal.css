@@ -69,6 +69,10 @@
     }
 }
 
+.item-image img{
+    max-height: 300px;
+
+}
 
 .active .item-content{
     animation-duration: 1.4s;
