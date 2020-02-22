@@ -10,9 +10,24 @@
 
 
 
-<div class="flip" id="news">Click to slide the panel down or up <i class="fas fa-minus"></i><i class="fas fa-plus"></i>
+<style>
+    .alert p {
+        padding: 0px;
+        margin: 0px;
+    }
+    .alert button{
+        margin-bottom: 5px;
+    }
+</style>
+
+<div class="flip" id="news">News Control Panel <i class="fas fa-minus"></i><i class="fas fa-plus"></i>
 </div>
 <div class="content" id="news-admin">
+
+    <div class="alert  alert-dismissible " role="alert">
+        
+      </div>
+
     <label for="news-selector">Select list:</label>
     <select class="form-control" id="news-selector">
         <option value="none">none</option>
@@ -23,11 +38,94 @@
     <input type="text" class="form-control" id="imageUrl">
     <label for="text">Text</label>
     <textarea style="margin-bottom: 10px;" class="form-control" rows="5" id="text"></textarea>
-    <button class="btn btn-primary">Submit</button>
-    <button  class="btn btn-primary">Save Edit</button>
+    <button id="submit" class="btn btn-success">Add News</button>
+    <button disabled id="delete" type="button" class="btn btn-danger">Delete</button>
+    <button disabled   id="edit" class="btn btn-primary">Save Edit</button>
 </div>
 
 
+<div class="flip" id="posts">Posts Control Panel <i class="fas fa-minus"></i><i class="fas fa-plus"></i>
+</div>
+<div class="content" id="posts-admin">
+
+    <div class="alert  alert-dismissible " role="alert"></div>
+
+    <label for="posts-selector">Select list:</label>
+    <select class="form-control" id="posts-selector">
+        <option value="none">none</option>
+    </select>
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" id="title">
+    <label for="imageUrl">Image Url</label>
+    <input type="text" class="form-control" id="imageUrl">
+    <label for="text">Text</label>
+    <textarea style="margin-bottom: 10px;" class="form-control" rows="5" id="text"></textarea>
+    <button id="submit" class="btn btn-success">Add News</button>
+    <button disabled id="delete" type="button" class="btn btn-danger">Delete</button>
+    <button disabled   id="edit" class="btn btn-primary">Save Edit</button>
+</div>
+
+
+<div class="flip" id="departments">Departments Control Panel <i class="fas fa-minus"></i><i class="fas fa-plus"></i>
+</div>
+<div class="content" id="departments-admin">
+
+    <div class="alert  alert-dismissible " role="alert"></div>
+
+    <label for="departments-selector">Select list:</label>
+    <select class="form-control" id="departments-selector">
+        <option value="none">none</option>
+    </select>
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" id="title">
+    <label for="imageUrl">Image Url</label>
+    <input type="text" class="form-control" id="imageUrl">
+    <label for="text">Text</label>
+    <textarea style="margin-bottom: 10px;" class="form-control" rows="5" id="text"></textarea>
+    <button id="submit" class="btn btn-success">Add News</button>
+    <button disabled id="delete" type="button" class="btn btn-danger">Delete</button>
+    <button disabled   id="edit" class="btn btn-primary">Save Edit</button>
+</div>
+
+<div class="flip" id="professors">Professors Control Panel <i class="fas fa-minus"></i><i class="fas fa-plus"></i>
+</div>
+<div class="content" id="professors-admin">
+
+    <div class="alert  alert-dismissible " role="alert"></div>
+
+    <label for="professors-selector">Professors list:</label>
+    <select class="form-control" id="professors-selector">
+        <option value="none">none</option>
+    </select>
+
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name">
+
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" id="title">
+
+    <label for="linkedin">Linkedin:</label>
+    <input type="text" class="form-control" id="linkedin">
+
+    <label for="twitter">Twitter:</label>
+    <input type="text" class="form-control" id="twitter">
+
+    <label for="mail">Mail:</label>
+    <input type="text" class="form-control" id="mail">
+
+    <label for="imageUrl">Image Url</label>
+    <input type="text" class="form-control" id="imageUrl">
+
+    <label for="dep">Depratments</label>
+    <input type="text" class="form-control" id="dep">
+
+    <label for="description">Description</label>
+    <textarea style="margin-bottom: 10px;" class="form-control" rows="5" id="description"></textarea>
+
+    <button id="submit" class="btn btn-success">Add News</button>
+    <button disabled id="delete" type="button" class="btn btn-danger">Delete</button>
+    <button disabled   id="edit" class="btn btn-primary">Save Edit</button>
+</div>
 
 
 
@@ -67,32 +165,14 @@
         return today;
     }
 
-
-
-
-    $(document).ready(function () {
-        function addNews() {
-            var date = new Date();
-
-            var dateTime = getCurrentDate(date) + ' ' + getTime(date);
-            let news = $("#news-admin");
-            
-            db.collection('news').add({
-                date: dateTime,
-                title: news.children("#title").val(),
-                text: news.children("#text").val(),
-                imagePath: news.children("#imageUrl").val(),
-            }).then((doc) => {
-                console.log(doc.id + " a news been added to the database")
-            })
-        }
-
-        function addSlider(sliderId, conetentId) {
+    function addSlider(sliderId, conetentId) {
+        
             let isOpen = false;
             $(conetentId).css("display", "none");
             $(sliderId).click(function () {
 
                 $(conetentId).slideToggle(500, () => {
+                   
                     if (isOpen) {
                         $(this).children("i:last").css("display", "flex")
                         $(this).children("i:first").css("display", "none")
@@ -106,44 +186,405 @@
 
             });
         }
-
+        function getSelectedElementOf(selectId){
+            return $(selectId).children("option:selected").val()
+        }
+        
         function addFormEvent(conentId, fun) {
-            $(conentId).children("button").click(() => {
-                console.log("ennnand")
+            $(conentId).children("#submit").click(() => {
                 fun()
             })
         }
+        function editFormEvent(conentId, fun) {
+            $(conentId).children("#edit").click(() => {
+                fun()
+            })
+        }
+        function deleteDocFrom(collectionName){
+            db.collection(collectionName).doc(getSelectedElementOf('#'+collectionName+'-selector')).delete()
+        }
+        function deleteFormEvent(conentId , collectionName){
+            $(conentId).children("#delete").click(() => {    
+                deleteDocFrom(collectionName)
+            })
+        }
+        function addAlert(alert){
+           return  {               
+                addClass(className){
+                    alert.addClass(className)
+                    alert.fadeIn();
+                    setTimeout( ()=>{
+                        alert.fadeOut(300)  
+                        setTimeout(()=>{
+                            alert.removeClass(className)
+                            alert.children("p").remove() 
+                        },301)                                       
+                    },3000)
+                },
+
+                success(message){
+                    alert.append('<p >'+"<strong>Success Alert!</strong> "+ message+"</p>")
+                    this.addClass("alert-success")
+                },
+
+                warning(message){
+                    alert.append('<p >'+"<strong>Warning Alert!!</strong> "+ message+"</p>")
+                    this.addClass("alert-warning")
+                },
+                
+                danger(message){
+                    alert.append('<p >'+"<strong>Danger Alert!</strong> "+ message+"</p>")
+                    this.addClass("alert-danger")  
+                }
+
+                
+            }
+        }
+
+        function buttonController(content){
+            let editBtn = content.children("#edit")
+            let deleteBtn = content.children("#delete")
+            return{
+                enable(){
+                    editBtn.attr("disabled", false);
+                    deleteBtn.attr("disabled", false);
+                },
+
+                disable(){
+                   editBtn.attr("disabled", true);
+                   deleteBtn.attr("disabled", true);
+                }
+            }
+        }
+        function resetForms(conetent){     
+            conetent.children("select").val("0")       
+            conetent.children("input").val("")
+            conetent.children("textarea").val("")
+        }
+        function addSelectEvent(contentId, collectionName, fun){
+                let content = $(contentId);
+                let selector = content.children("select")
+                let selectorId ="#"+selector.attr("id")
+                let buttons = buttonController(content)
+                selector.change(()=>{                
+                selectedElement = getSelectedElementOf(selectorId)            
+                if(selectedElement != "none"){
+                    db.collection(collectionName).doc(selectedElement).get().then((doc)=>{
+                        fun(content,doc)                    
+                    })
+                    buttons.enable();
+                    
+                }else{
+                    resetForms(content);
+                    buttons.disable()
+                }
+            });
+        }
+
+        function addRealtimeUpdate(collectionName){
+            let selectorId = "#"+collectionName+"-selector"
+            let contentId = "#"+collectionName +"-admin"
+            let element = (collectionName != "news" && collectionName != "professors"?  collectionName.substring(0, collectionName.length - 1) : collectionName)
+            let alert =  addAlert($(contentId).children(".alert"))
+            
+                
+            
+            db.collection(collectionName).onSnapshot(function (snapshot) {           
+                snapshot.docChanges().forEach(function (change){
+                    let doc = change.doc.data();
+                    if(change.type === "added") {
+                        id = change.doc.id;
+                        $(selectorId).append("<option value = "+id  +" id ="+id+"> Title : "+doc.title +" </option>")
+                        alert.success("A new "+element+" with title \" "+doc.title +" \" is been added ")
+                    } 
+                    else if (change.type === "modified") {
+                        $("#"+ getSelectedElementOf(selectorId)).text("Title : " +doc.title)
+                        alert.warning("A " +element+ " with title \" "+doc.title +" \" is been updated")
+                    }else {  
+                        $("#"+ getSelectedElementOf(selectorId)).remove()
+                        alert.danger("A "+element+" with title \" "+doc.title +" \" is been deleted")                                        
+                    }
+
+                    if(getSelectedElementOf($(contentId)) != "none"){
+                        buttonController($(contentId)).disable()
+                        resetForms($(contentId));
+                    }
+            });
+        });
+        }
 
        
-        addSlider("#news", "#news-admin");
-        addFormEvent("#news-admin", addNews)
 
+
+
+
+    $(document).ready(function () {
+        
+        
+        
+        $(".alert").hide();
+       
+        postsAlert = addAlert($("#posts-admin").children(".alert"))
+       
+        
+        addSlider("#news", "#news-admin");
+        addSlider("#posts" ,"#posts-admin")
+        addSlider("#departments" ,"#departments-admin")
+        addSlider("#professors", "#professors-admin")
+
+
+        // News
+        addFormEvent("#news-admin", function(){
+            var date = new Date();
+            var dateTime = getCurrentDate(date) + ' ' + getTime(date);
+            let news = $("#news-admin");
+            
+            db.collection('news').add({
+                date: dateTime,
+                title: news.children("#title").val(),
+                text: news.children("#text").val(),
+                imagePath: news.children("#imageUrl").val(),
+            }).then((doc) =>{
+                resetForms(news);
+                console.log(doc.id + " a news been added to the database")
+            })
+        })
+        editFormEvent("#news-admin", function(){
+          let news = $("#news-admin");
+          db.collection("news").doc(getSelectedElementOf('#news-selector')).update({
+                title: news.children("#title").val(),
+                text: news.children("#text").val(),
+                imagePath: news.children("#imageUrl").val(),
+          }).then(()=>{
+            resetForms(news)
+            buttonController($("#news-admin")).disable()
+          })
+        })
+        deleteFormEvent("#news-admin","news")
+        // News
+        
+        // Posts
+        addFormEvent("#posts-admin" , function(){
+            var date = new Date();    
+            var dateTime = getCurrentDate(date)+' '+ getTime(date);
+            let posts = $("#posts-admin");
+            db.collection('posts').add({
+                date: dateTime,
+                title: posts.children("#title").val(),
+                text: posts.children("#text").val(),
+                imagePath: posts.children("#imageUrl").val(),
+                comments:[]
+            }).then((doc)=>{
+                 console.log(doc.id + " is been added to the database")
+            })
+        })
+        editFormEvent("#posts-admin" , function(){
+          let posts = $("#posts-admin");
+          db.collection("posts").doc(getSelectedElementOf('#posts-selector')).update({
+                title: posts.children("#title").val(),
+                text: posts.children("#text").val(),
+                imagePath: posts.children("#imageUrl").val(),
+          }).then(()=>{
+            resetForms(posts)
+            buttonController($("#news-admin")).disable()
+          })
+        })
+        deleteFormEvent("#posts-admin" , "posts")
+        // Posts
+
+        // departments
+        addFormEvent("#departments-admin" , function(){            
+            let departments = $("#departments-admin");            
+            db.collection('departments').add({                
+                title: departments.children("#title").val(),
+                text: departments.children("#text").val(),
+                imagePath: departments.children("#imageUrl").val(),
+            }).then((doc) =>{
+                resetForms(departments);
+                console.log(doc.id + " is  been added to the database")
+            })
+        })
+        editFormEvent("#departments-admin", function(){
+            let departments = $("#departments-admin");
+            db.collection("departments").doc(getSelectedElementOf('#departments-selector')).update({
+                    title: departments.children("#title").val(),
+                    text: departments.children("#text").val(),
+                    imagePath: departments.children("#imageUrl").val(),
+            }).then(()=>{
+                resetForms(departments)
+                buttonController($("#departments-admin")).disable()
+            })
+        })
+        deleteFormEvent("#departments-admin" , "departments")
+
+        // departments
+
+        // Professors
+        addFormEvent("#professors-admin", function(){
+            let professors =  $("#professors-admin");                
+            db.collection("professors").add({                
+                name: professors.children("#name").val() ,
+                title:professors.children("#title").val() ,
+                description:professors.children("#description").val() ,
+                imageUrl:professors.children("#imageUrl").val(),                
+                depratments:professors.children("#dep").val().split(","),
+                twitter:professors.children("#twitter").val(),
+                mail:professors.children("#mail").val(),
+                linkedin:professors.children("#linkedin").val()
+            })
+        })
+        editFormEvent("#professors-admin", function(){
+            let professors = $("#professors-admin");
+            db.collection("professors").doc(getSelectedElementOf('#professors-selector')).update({
+                name: professors.children("#name").val() ,
+                title:professors.children("#title").val() ,
+                description:professors.children("#description").val() ,
+                imageUrl:professors.children("#imageUrl").val(),                
+                depratments:professors.children("#dep").val().split(","),
+                twitter:professors.children("#twitter").val(),
+                mail:professors.children("#mail").val(),
+                linkedin:professors.children("#linkedin").val()
+            }).then(()=>{
+                resetForms(professors)
+                buttonController($("#professors-admin")).disable()
+            })
+        })
+        deleteFormEvent("#professors-admin" , "professors")
+
+        // Professors
+
+        addSelectEvent("#news-admin", "news" , function(content,doc){
+            content.children("#title").val(doc.data().title)
+            content.children("#imageUrl").val(doc.data().imagePath)
+            content.children("#text").val(doc.data().text) 
+        })
+        addSelectEvent("#posts-admin", "posts" , function(content,doc){
+            content.children("#title").val(doc.data().title)
+            content.children("#imageUrl").val(doc.data().imagePath)
+            content.children("#text").val(doc.data().text) 
+        })
+        addSelectEvent("#departments-admin", "departments" , function(content,doc){
+            content.children("#title").val(doc.data().title)
+            content.children("#imageUrl").val(doc.data().imagePath)
+            content.children("#text").val(doc.data().text) 
+        })
+        addSelectEvent("#professors-admin", "professors" , function(content,doc){
+            content.children("#title").val(doc.data().title)
+            content.children("#imageUrl").val(doc.data().imageUrl)
+            content.children("#description").val(doc.data().description) 
+            content.children("#linkedin").val(doc.data().linkedin) 
+            content.children("#twitter").val(doc.data().twitter) 
+            content.children("#name").val(doc.data().name) 
+            content.children("#mail").val(doc.data().mail) 
+            content.children("#dep").val(doc.data().depratments) 
+        })
+
+
+        addRealtimeUpdate("news")
+        addRealtimeUpdate("posts")
+        addRealtimeUpdate("departments")
+        addRealtimeUpdate("professors")
+
+
+
+/*
         db.collection("news").onSnapshot(function (snapshot) {
             let selector = $("#news-selector")
             snapshot.docChanges().forEach(function (change) {
+                let doc = change.doc.data();
                 if(change.type === "added") {
-                    selector.append("<option value = "+ change.doc.id +"> Title : "+ change.doc.data().title + " || Date : " + change.doc.data().date+" </option>")
+                    id = change.doc.id;
+                    selector.append("<option value = "+id  +" id ="+id+"> Title : "+doc.title + " || Date : " + doc.date+" </option>")
+                    newsAlert.success("A news with title \" "+doc.title +" \" is been added ")
+                } 
+                else if (change.type === "modified") {
+                    $("#"+ getSelectedElementOf('#news-selector')).text("Title : " +doc.title + " || Data :"+ doc.date )
+                    newsAlert.warning("A news with title \" "+doc.title +" \" is been updated")
+                }else {  
+                    $("#"+ getSelectedElementOf('#news-selector')).remove()
+                    newsAlert.danger("A news with title \" "+doc.title +" \" is been deleted")                                        
+                }
+
+                if(getSelectedElementOf($("#news-admin")) != "none"){
+                    buttonController($("#news-admin")).disable()
+                    resetForms($("#news-admin"));
+                }
+            });
+        });
+*/
+       
+
+/*
+        db.collection("posts").onSnapshot(function (snapshot) {
+            let selector = $("#posts-selector")
+            snapshot.docChanges().forEach(function (change) {
+                let doc = change.doc.data();
+                if(change.type === "added") {
+                    id = change.doc.id;
+                    selector.append("<option value = "+id  +" id ="+id+"> Title : "+doc.title + " || Date : " + doc.date+" </option>")
+                    postsAlert.success("A new post with title \" "+doc.title +" \" is been added ")
+                } 
+                else if (change.type === "modified") {
+                    $("#"+ getSelectedElementOf('#news-selector')).text("Title : " +doc.title + " || Data :"+ doc.date )
+                    postsAlert.warning("A news with title \" "+doc.title +" \" is been updated")
+                }else {  
+                    $("#"+ getSelectedElementOf('#posts-selector')).remove()
+                    postsAlert.danger("A news with title \" "+doc.title +" \" is been deleted")                                        
+                }
+
+                if(getSelectedElementOf($("#posts-admin")) != "none"){
+                    buttonController($("#posts-admin")).disable()
+                    resetForms($("#posts-admin"));
+                }
+            });
+        });
+        
+        db.collection("departments").onSnapshot(function (snapshot) {
+            let selector = $("#departments-selector")
+            snapshot.docChanges().forEach(function (change) {
+                let doc = change.doc.data();
+                if(change.type === "added") {
+                    id = change.doc.id;
+                    selector.append("<option value = "+id  +" id ="+id+"> Title : "+doc.title +" </option>")
+                    postsAlert.success("A new department with title \" "+doc.title +" \" is been added ")
+                } 
+                else if (change.type === "modified") {
+                    $("#"+ getSelectedElementOf('#news-selector')).text("Title : " +doc.title)
+                    postsAlert.warning("A department with title \" "+doc.title +" \" is been updated")
+                }else {  
+                    $("#"+ getSelectedElementOf('#posts-selector')).remove()
+                    postsAlert.danger("A department with title \" "+doc.title +" \" is been deleted")                                        
+                }
+
+                if(getSelectedElementOf($("#departments-admin")) != "none"){
+                    buttonController($("#departments-admin")).disable()
+                    resetForms($("#departments-admin"));
                 }
             });
         });
 
+
+        
         $('#news-selector').change(()=>{
             let news = $("#news-admin");
-         
-            
-            if($('#news-selector').children("option:selected").val() != "none"){
-                db.collection("news").doc($('#news-selector').find(":selected").val()).get().then((doc)=>{
+            let buttons = buttonController(news)
+            selectedElement = getSelectedElementOf('#news-selector')            
+            if(selectedElement != "none"){
+                db.collection("news").doc(selectedElement).get().then((doc)=>{
                     news.children("#title").val(doc.data().title)
                     news.children("#imageUrl").val(doc.data().imagePath)
-                    news.children("#text").val(doc.data().text)
-                    
+                    news.children("#text").val(doc.data().text)                    
                 })
+                buttons.enable();
+                
+            }else{
+                resetForms(news);
+                buttons.disable()
             }
-            
         });
+        */
+      
         
-
-
 
     });
 

@@ -9,7 +9,11 @@
   
 
   <%- include( 'includes/_navbar') %>
-    
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
 
   <link rel="stylesheet" href="../public/styles/index.css">
   <link rel="stylesheet" href="../public/styles/coursal.css">
@@ -130,16 +134,16 @@
     <div class="container my-coursal">
       
       <% for (let singelNews of news) { %>
-        <div class="row coursal-item">
-          <div class="col-lg-6  item-content">
-            <h3><%= singelNews.data().title %> <i><%= singelNews.data().date %></i></h3>
-            <P><%= singelNews.data().text %></P>
+        <div id="<%= singelNews.id %>" class="row coursal-item">
+          <div  class="col-lg-6  item-content">
+            <h3 class="newsTitle"><%= singelNews.data().title %> <i><%= singelNews.data().date %></i></h3>
+            <P class="newsText"><%= singelNews.data().text %></P>
             
             <a href="<%= singelNews.id %>" class="btn btn-default">READ MORE</a>
           </div>
 
           <div class="col-lg-6 item-image">
-            <img class="img-fluid " src="<%= singelNews.data().imagePath %>">
+            <img class="img-fluid" src="<%= singelNews.data().imagePath %>">
           </div>
         </div>
 
@@ -222,9 +226,25 @@
     crossorigin="anonymous"></script>
     -->
   <script>
+     var firebaseConfig = {
+        apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
+        authDomain: "university-45734.firebaseapp.com",
+        databaseURL: "https://university-45734.firebaseio.com",
+        projectId: "university-45734",
+        storageBucket: "university-45734.appspot.com",
+        messagingSenderId: "694823147172",
+        appId: "1:694823147172:web:970f883121c3e21ba3f831",
+        measurementId: "G-F24T378RP7"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var db = firebase.firestore();
+
     $(document).ready(() => {
 
-        
+        // start ---- > custom coursal
         var coursalItems = $(".coursal-item");
         var currentPage = 0;
         
@@ -283,12 +303,10 @@
        coursalInterval;
 
       $(".my-coursal").mouseenter(()=>{
-        console.log("enter")
         clearInterval(coursalInterval)
       })
 
       $(".my-coursal").mouseleave(()=>{
-        console.log("leave")
         coursalInterval = setInterval(()=>next(),3000)
         coursalInterval;
       })
@@ -302,7 +320,23 @@
         $("#goNext").click(()=> next())
         $("#goBack").click(()=> back())
         
+        // end --- > custom coursal
 
+
+    db.collection("news") .onSnapshot(function(snapshot) {
+
+      snapshot.docChanges().forEach(function(change) {
+          if (change.type === "modified") {
+            console.log("en")
+              let news =  $("#" + change.doc.id)
+              let data = change.doc.data()
+             
+              news.find(".newsTitle").text(data.title)             
+              news.find(".newsText").text(data.text)
+              news.find(".img-fluid").attr("src" , "" + data.imagePath) 
+          }
+      });
+      });
     })
 
 
