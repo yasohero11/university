@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require("./routes/index"));
 app.use(require("./routes/posts"));
 app.use(require("./routes/admin"));
+app.use(require('./routes/signup'));
 
 /*  access a subcollection
 db.collection("posts").doc("EEjdmoOPlOfcyryBVaSO").collection('comments').get().then((doc)=>{

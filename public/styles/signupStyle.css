@@ -1,0 +1,84 @@
+ body{
+    background: rgb(48, 48, 48);
+}
+button{
+    width: 100px;
+    
+    
+}
+
+.dis{
+    transition: 0.8s;
+}
+.follow_us button{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 100%;
+    margin: 0px 5px;
+}
+.follow_us{
+    text-align: center;
+}
+.form-group{
+    padding: 0px 50px;
+}
+.form-check{
+    padding: 2px 71px;
+}
+form div:last-child button{
+    width: 250px;
+    border-radius: 20px ;
+    padding: 7px;
+}
+#submitBtn{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    
+}
+#signupForm{
+    display: none;
+    transition: 1.6s;
+}
+#con{
+    position: relative;
+    overflow: hidden;
+    
+    
+}
+#motion{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:linear-gradient(140deg, #c31432 -5%, #240b36 );
+    z-index: 1;
+    transition: 1.5s;
+    border-radius:10px;
+}
+.container-fluid form{
+    background: white;
+    padding: 10px;
+   
+    height: 620px;
+    position: relative;
+    border-radius: 12px;
+}
+.left{
+    left: -101%;
+}
+.right{
+    left: 101%;
+    
+}
+@media(max-width: 360px){
+    .form-group{
+        padding: 0px 10px;
+    }
+    .form-check{
+        padding: 2px 35px;
+    }
+}
+
+

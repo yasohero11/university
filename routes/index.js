@@ -41,7 +41,10 @@ router.get("/", (req, res) => {
     }).then(()=>{
         db.collection("news").get().then((snapshot2)=>{
             news = snapshot2.docs
-            res.render("index", { professors:professors , news:news});
+            db.collection("departments").get().then((snapshot3)=>{
+            departments = snapshot3.docs
+            res.render("index", { professors:professors , news:news, departments:departments});
+            })
         })
         
     })

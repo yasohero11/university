@@ -14,6 +14,8 @@
   <!-- TODO: Add SDKs for Firebase products that you want to use
        https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
   <link rel="stylesheet" href="../public/styles/index.css">
   <link rel="stylesheet" href="../public/styles/coursal.css">
@@ -69,59 +71,23 @@
 
   <div class="container faculties">
     <div class="row justify-content-center">
+      <% for (let department of departments) { %>
       <div class="col-lg-4 col-sm-9" style="width: 100%;">
         <div class="card">
           <p>12</p>
           <div class="card-head">
-            <img src="https://giu-uni.de//img/content/academic-specializations/informatics/software-engineering.jpg"
+            <img src="<%= department.data().imagePath %>"
               class="card-img-top" alt="...">
           </div>
           <div class="card-body">
-            <h4 class="card-title">Computer Science</h4>
-            <p class="card-text">Computer science (sometimes called computation science) is the study of processes that
-              interact with data and that can be represented .</p>
-            <a href="#" class="btn btn-default">READ MORE</a>
+            <h4 class="card-title"><%= department.data().title %></h4>
+            <p class="card-text"><%= department.data().text %></p>
+            <a href="#" onclick="window.location.href = '../departments/<%=department.id %>'" class="btn btn-default">READ MORE</a>
           </div>
         </div>
       </div>
-
-      <div class="col-lg-4  col-sm-9" style="width: 100%;">
-        <div class="card">
-          <p>22</p>
-          <div class="card-head">
-            <img src="https://www.staffordglobal.org/wp-content/uploads/2019/10/mba-top-up.jpg" class="card-img-top"
-              alt="...">
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Business Administration</h4>
-            <p class="card-text">The Higher Certificate in Business Management (HCIBM) is a 1 year programme that
-              provides an overview of the essentials of business management theory and practice. It is designed to
-              provide a convenient and appropriate avenue into business management studies.</p>
-            <a href="#" class="btn btn-default">READ MORE</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-sm-9" style="width: 100%;">
-        <div class="card">
-          <p>17</p>
-          <div class="card-head">
-            <img
-              src="https://udemycoupons.me/wp-content/uploads/2020/01/Information-Technology-101-Udemy-Coupon-Free-Udemy-Coupon-Free.jpg"
-              class="card-img-top" alt="...">
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Computer Science</h4>
-            <p class="card-text">information technology (IT) is basically synonymous with the guys and gals you call
-              when you need help with a computer issue. While that view of information technology isn’t totally wrong,
-              it drastically understates the scope of this critical career field.</p>
-            <a href="#" class="btn btn-default">READ MORE</a>
-          </div>
-        </div>
-      </div>
-
+      <% } %>
     </div>
-
   </div>
 
 
@@ -139,7 +105,7 @@
             <h3 class="newsTitle"><%= singelNews.data().title %> <i><%= singelNews.data().date %></i></h3>
             <P class="newsText"><%= singelNews.data().text %></P>
             
-            <a href="<%= singelNews.id %>" class="btn btn-default">READ MORE</a>
+            <a href="#" class="btn btn-default">READ MORE</a>
           </div>
 
           <div class="col-lg-6 item-image">
@@ -217,6 +183,28 @@
 
 </div>
 
+<!-- <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+
+<div class="container">
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <h4>Login</h4><br />
+      <form id="login-form">
+        <div class="input-field">
+          <input type="email" id="login-email" required />
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="login-password" required />
+          <label for="login-password">Your password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Login</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+
 
 <!--
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -225,7 +213,19 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
     -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script> -->
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+var modals = document.querySelectorAll('.modal');
+M.Modal.init(modals);
+
+var items = document.querySelectorAll('.collapsible');
+M.Collapsible.init(items);
+
+});
      var firebaseConfig = {
         apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
         authDomain: "university-45734.firebaseapp.com",
@@ -239,10 +239,33 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-
+    const auth = firebase.auth();
     var db = firebase.firestore();
+/*
+    auth.onAuthStateChanged( user =>{
+    console.log(user)
+    })
+    */
+    auth.signInWithEmailAndPassword("tazosama33@gmail.com", "123456a").then(()=>{
+      console.log(auth.currentUser)
+    })
+    //auth.signOut()
 
+    
     $(document).ready(() => {
+
+        for (element of $(".card-text")){
+            let words =  element.innerHTML.split(" ")
+            let text = ""            
+           if(words.length >= 20){ 
+            for(let i = 0 ; i < 20  ; i++)
+              text = text +" "+ words[i]
+
+            element.innerHTML = text + " ...."
+           }
+        }
+    
+        
 
         // start ---- > custom coursal
         var coursalItems = $(".coursal-item");
@@ -337,6 +360,7 @@
           }
       });
       });
+      
     })
 
 

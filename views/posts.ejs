@@ -28,9 +28,9 @@
             <section class=" col-sm-11 col-md-6 p-5">
 
                 <% for (let doc of docs) { %>
-                    <div class="card" style="width:100%; margin-bottom: 20px;">
+                    <div id="<%= doc.id %>" class="card" style="width:100%; margin-bottom: 20px;">
                         <div class="m-2">
-                            <img style="width: 50px; height: 50px;" src="<%=doc.data().imagePath%>">
+                            <img class="post-logo" style="width: 50px; height: 50px;" src="<%=doc.data().imagePath%>">
                             <span><%=doc.data().date%></span>
                         </div>
                         <img class="card-img-top" src="<%=doc.data().imagePath%>" alt="Card image">
@@ -42,7 +42,7 @@
                                 <%=doc.data().text%>
                             </p>
                             <div class="comments-area border m-5" >
-                                <div class="comments" id="<%= doc.id%>">
+                                <div class="comments" >
                                 <h4 class="p-2"> Comments</h4>
                                 <% if (doc.data().comments.length != 0) { %>
                                     <% for (comment of doc.data().comments) { %>
@@ -65,7 +65,7 @@
                                             <%}%>
                                 </div>
                                                 <hr>
-                                                <form class="comment-field" onsubmit="event.preventDefault();">
+                                                <form  class="comment-field <%= doc.id %>" onsubmit="event.preventDefault();">
                                                     <input type="text" placeholder="Write your comment here ..." style="padding-left: 10px;">
                                                 </form>
 
@@ -99,6 +99,7 @@
     </div>
 </div>
 
+
 <script>
     var firebaseConfig = {
         apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
@@ -113,9 +114,11 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-
+    const auth = firebase.auth();
+    console.log(auth.currentUser)
     var db = firebase.firestore();
-    var comments_area_list = document.getElementsByClassName("comments-area");
+    var  comment_area_list = $(".comment-field")
+    
     //console.log(comments_area_list)
 
     function getTime(date) {
@@ -135,16 +138,16 @@
         return today;
     }
 
-    function addNewComment(comment_area, post_id, user_name, text) {
+    function addNewComment( post_id, user_name, text) {
         var date = new Date();
         var dateTime = getCurrentDate(date) + ' ' + getTime(date);
+        console.log(post_id +" "+user_name+" "+text)
         db.collection('posts').doc(post_id).update({
             comments: firebase.firestore.FieldValue.arrayUnion({
                 user_id: 1,
                 user_name: user_name,
                 date: dateTime,
                 text: text
-
             })
         })
     }
@@ -155,22 +158,38 @@
             if (change.type === "modified") {
                 let doc  = change.doc;
                 let comments =doc.data().comments;  
-                let addedComment = comments[comments.length-1]
-                
-                
-                document.getElementById(doc.id).innerHTML += '<div class="comment">' +
+                let post = $("#"+doc.id);
+                let commentsSection = post.find(".comments")
+                commentsSection.children(".comment").remove();
+                post.find(".post-logo").attr("src" , doc.data().imagePath)
+                post.children(".card-img-top").attr("src" , doc.data().imagePath)
+                post.find(".card-title").text( doc.data().title)
+                post.find(".card-text").text(doc.data().text)
+                                                                               
+                for(let comment of comments){
+                    
+                    commentsSection.append('<div class="comment">' +
                 ' <div class=" media  p-3">' +
                 '<img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">' +
                 '<div class="media-body">' +
-                '<h6>'+ addedComment.user_name +'<small><i> Posted on'+ addedComment.date + '</i></small></h6>' +
-                '<p>'+ addedComment.text +'</p></div></div>' +
+                '<h6>'+ comment.user_name +'<small><i> Posted on'+ comment.date + '</i></small></h6>' +
+                '<p>'+ comment.text +'</p></div></div>' +
 
-                '<div style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;"><a href="#" class="p-1">Replay</a></div></div>'
-                
+                '<div style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;"><a href="#" class="p-1">Replay</a></div></div>')
+                }                                                
             }
         });
     });
 
+    for ( let field of comment_area_list){
+        field.addEventListener('submit', () => {
+            
+            let textField = field.getElementsByTagName("input")[0]
+            addNewComment(field.classList[1], "khaled", textField.value);
+            textField.value = "";
+        })
+    }
+/*
     for (comment_area of comments_area_list) {
         let comment_field = comment_area.querySelector(".comment-field");
         let commentArea = comment_area
@@ -182,6 +201,7 @@
 
         })
     }
+    */
 </script>
 
 

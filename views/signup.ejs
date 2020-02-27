@@ -1,0 +1,113 @@
+<!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+       
+        <style>
+            .dis,#logdis,#loginPassDis {
+                text-align: center;
+            }
+        </style>
+        <%- include( 'includes/_navbar') %>
+        
+        <link rel="stylesheet" href="../public/styles/signupStyle.css">
+        <div class="container-fluid" style="margin-top: 50px;">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 col-sm-7 col-xs-12" id="con">
+                    <div id="motion" class="right"></div>
+                    <form action="/signin" id="loginForm"  method="POST">
+                        <div><button id="toSignup" name="ahmed" style="border-radius: 20px; padding-left: 6px ;" type="button" class="btn btn-outline-dark"><i class="fas fa-chevron-left"></i> Sign up</button></div>
+                        <div class="follow_us" style="margin: 20px 0px 80px 0px ;">
+                            <button type="button" class="btn btn-outline-dark">  <i class="fab fa-facebook"></i></button>
+                            <button type="button" class="btn btn-outline-dark">  <i class="fab fa-google"></i></button>
+                            <button type="button" class="btn btn-outline-dark">  <i class="fab fa-instagram"></i></button>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email" class="form-control " id="email" name="loginemail">
+                            <div id="logdis"></div>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input type="password" class="form-control " id="pwd" name="loginpassword">
+                            <div  id="loginPassDis"></div>
+                        </div>
+                        <div class="form-group form-check" id="cccc">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"> Remember me
+                          </label>
+
+                        </div>
+                        <div id="submitBtn" style="text-align: center;"><button type="submit" class="btn btn-primary" id="btlogin">Submit</button></div>
+
+                    </form>
+
+                    <form action="/signup" method="POST"  id="signupForm" style="background: white;">
+                        <div style="text-align: right;"><button id="toLogin" style="border-radius: 20px; padding-right: 6px ;" type="button" class="btn btn-outline-dark"> Login <i class="fas fa-chevron-right"></i></button></div>
+                        <div class="follow_us" style="margin-top: 20px ;">
+                            <button type="button" class="btn btn-outline-dark">  <i class="fab fa-facebook"></i></button>
+                            <button type="button" class="btn btn-outline-dark">  <i class="fab fa-google"></i></button>
+                            <button type="button" class="btn btn-outline-dark">  <i class="fab fa-instagram"></i></button>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control myform" id="name" name="name">
+                            <div class="dis"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email" class="form-control myform" id="email2" name="signupemail">
+                            <div class="dis" id="emailDis"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control myform" id="password2" name="signuppassword">
+                            <div class="dis" id="passDis"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm">Confirm Password:</label>
+                            <input type="password" class="form-control myform" id="confirm" name="signupconfirm">
+                            <div class="dis" id="confirmDis"></div>
+                        </div>
+                        <button onclick="window.location.href = '/signin/google'" > signup wwith google</button>
+                        <div id="submitBtn" style="text-align: center;"><button type="submit" class="btn btn-primary">Submit</button></div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+		
+        <script src="../public/javascripts/validation.js"></script>
+        <script>
+            var toLogin = document.getElementById("toLogin")
+            var toSignup = document.getElementById("toSignup")
+            var loginForm = document.getElementById("loginForm")
+            var signupForm = document.getElementById("signupForm")
+            var motion = document.getElementById("motion")
+            
+            toSignup.addEventListener("click", () => {
+                motion.classList.remove("right")
+                motion.classList.add("left")
+
+                setTimeout(() => {
+                    loginForm.style.display = "none"
+                    signupForm.style.display = "list-item"
+                }, 400)
+            })
+            toLogin.addEventListener("click", () => {
+                motion.classList.remove("left")
+                motion.classList.add("right")
+
+                setTimeout(() => {
+                    loginForm.style.display = "list-item"
+                    signupForm.style.display = "none"
+                }, 400)
+                toSignup.classList.add("bt")
+            })
+        </script>
