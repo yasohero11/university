@@ -206,26 +206,9 @@
 
 
 
-<!--
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-    -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script> -->
+  <script src="../public/javascripts/customCoursel.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-var modals = document.querySelectorAll('.modal');
-M.Modal.init(modals);
-
-var items = document.querySelectorAll('.collapsible');
-M.Collapsible.init(items);
-
-});
+   
      var firebaseConfig = {
         apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
         authDomain: "university-45734.firebaseapp.com",
@@ -241,17 +224,19 @@ M.Collapsible.init(items);
     firebase.analytics();
     const auth = firebase.auth();
     var db = firebase.firestore();
+    
 /*
-    auth.onAuthStateChanged( user =>{
+    auth.onAuthStateChanged( (user) =>{
     console.log(user)
     })
-    */
+  
     auth.signInWithEmailAndPassword("tazosama33@gmail.com", "123456a").then(()=>{
       console.log(auth.currentUser)
     })
+    */
     //auth.signOut()
 
-    
+    console.log(auth.currentUser)
     $(document).ready(() => {
 
         for (element of $(".card-text")){
@@ -265,86 +250,6 @@ M.Collapsible.init(items);
            }
         }
     
-        
-
-        // start ---- > custom coursal
-        var coursalItems = $(".coursal-item");
-        var currentPage = 0;
-        
-         if($(".coursal-item.active").length != 0){
-            for(let i  = 0 ; i < coursalItems.length; i++){
-              element = coursalItems[i];
-             if(!element.classList.contains("active")){
-                element.style.display = 'none'
-              }
-              else
-                currentPage = i;              
-            }
-          }else{
-            for( element of coursalItems){
-                element.style.display = 'none'
-            }
-            coursalItems[0].style.display = 'flex'
-          }
-        
-
-        function next(){
-          if(currentPage+1 == coursalItems.length){
-            
-            switchPages(currentPage , 0);
-            currentPage = 0;
-          }else{
-            
-            switchPages(currentPage,++currentPage)
-            
-          }
-        }
-
-        function back(){
-          if(currentPage == 0){
-            
-            switchPages(0 , coursalItems.length-1);
-            currentPage = coursalItems.length-1;
-          }else  
-            switchPages(currentPage,--currentPage)
-        }
-
-        function switchPages(currentIndex , nextIndex){
-          let current_page = coursalItems[currentIndex];
-          let next_page = coursalItems[nextIndex];
-          current_page.style.display = 'none';
-          current_page.classList.remove("active")
-          next_page.style.display = 'flex';
-          next_page.classList.add("active")
-        }
-/*
-        document.getElementsByClassName("my-coursal")[0].addEventListener("mouseover" , ()=>{
-              console.log("em")
-        })
-*/
-       var coursalInterval = setInterval(()=>next(),3000)
-       coursalInterval;
-
-      $(".my-coursal").mouseenter(()=>{
-        clearInterval(coursalInterval)
-      })
-
-      $(".my-coursal").mouseleave(()=>{
-        coursalInterval = setInterval(()=>next(),3000)
-        coursalInterval;
-      })
-
-      
-       /*
-        $(".item-image").hover(function(){
-          clearInterval(coursalInterval)
-        })
-        */
-        $("#goNext").click(()=> next())
-        $("#goBack").click(()=> back())
-        
-        // end --- > custom coursal
-
 
     db.collection("news") .onSnapshot(function(snapshot) {
 

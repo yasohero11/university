@@ -10,11 +10,47 @@ let passsemail = document.getElementById("pwd");
 let logdis = document.getElementById("logdis");
 let loginPssDis = document.getElementById("loginPassDis");
 let emailFeild = list[1];
-var signupForm =  document.getElementById("signupForm");
+let loginForm =  document.getElementById("loginForm");
+let signupForm =  document.getElementById("signupForm");
 
 
 
 
+
+ 
+
+signupForm.addEventListener("submit" , (e)=>{
+  e.preventDefault();
+  if(isValid()){
+    
+    auth.createUserWithEmailAndPassword(emailFeild.value, password.value).then(()=>{
+      window.location.href = "/signup"
+    }).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/weak-password') 
+            console.log('The password is too weak.');
+        else 
+            console.log(errorMessage);
+
+        console.log(error);
+    });
+  }
+})
+
+
+loginForm.addEventListener("submit" , (e)=>{
+  e.preventDefault();
+  auth.signInWithEmailAndPassword(loginemail.value, passsemail.value).then((user)=>{
+    console.log(auth.currentUser)
+   // window.location.href = "/"
+  }).catch(e => {
+    alert(e.message);
+    res.redirect('/signin')
+})
+
+  
+})
 
 
 
@@ -49,7 +85,7 @@ function removeSpaces(text) {
 }
 
 function isEpmpty(text) {
-  console.log(text.value)
+  
   if (text.value == "" || text.value == null)
     return true;
 
@@ -192,7 +228,6 @@ function isValid() {
   cheackEmail();
   checkPassword();
   for (let i = 0; i < disList.length; i++){
-    console.log("en herereer")
     if (disList[i].style.borderBottom != "2px solid rgb(84, 242, 108)")
       return false;
   }

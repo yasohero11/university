@@ -6,18 +6,6 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 var admin = require("firebase-admin");
 const firebase = require("firebase")
-firebase.initializeApp({
-    apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
-    authDomain: "university-45734.firebaseapp.com",
-    databaseURL: "https://university-45734.firebaseio.com",
-    projectId: "university-45734",
-    storageBucket: "university-45734.appspot.com",
-    messagingSenderId: "694823147172",
-    appId: "1:694823147172:web:970f883121c3e21ba3f831",
-    measurementId: "G-F24T378RP7"
-  })
-
-const db = admin.firestore();
 const auth = firebase.auth()
 
 router.get('/signup', (req, res, next) => {
@@ -70,8 +58,8 @@ router.post('/signin', (req, res, next) => {
 
     var loginemail = req.body.loginemail;
     var loginpassword = req.body.loginpassword;
-    const promise = auth.signInWithEmailAndPassword(loginemail, loginpassword).then(()=>{
-        console.log(loginemail + ' ' + loginpassword)
+    const promise = auth.signInWithEmailAndPassword(loginemail, loginpassword).then((user)=>{
+       // console.log(loginemail + ' ' + loginpassword)
     })
 
     promise.catch(e => {
@@ -86,6 +74,9 @@ router.post('/signin', (req, res, next) => {
     
 });
 
-
+router.get("/logout",(req, res, next)=>{
+    auth.signOut()
+         
+})
 
 module.exports = router;

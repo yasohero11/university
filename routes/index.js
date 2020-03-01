@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 var admin = require("firebase-admin");
-
+const firebase = require("firebase")
+const auth = firebase.auth()
 const db = admin.firestore();
 /*
 db.collection("professors").add({
@@ -34,8 +35,19 @@ addProfessor("Essam Elewa","DR","Dr.Essam Elewa is professor tech programming la
 
 addProfessor("Crews tery","Acctor","black acctor","https://www.famousbirthdays.com/faces/crews-terry-image.jpg",["actor"],"https://","https://","https://")
 */
-router.get("/", (req, res) => {
 
+/*
+auth.onAuthStateChanged(user => {
+        if(user){
+        console.log("index")
+        console.log(user.uid)
+        }
+        else
+        console.log("noooo")
+})
+*/
+router.get("/", (req, res) => {
+    
     db.collection("professors").get().then((snapshot) => {
         professors = snapshot.docs
     }).then(()=>{
@@ -45,8 +57,7 @@ router.get("/", (req, res) => {
             departments = snapshot3.docs
             res.render("index", { professors:professors , news:news, departments:departments});
             })
-        })
-        
+        })        
     })
 })
 

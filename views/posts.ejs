@@ -1,8 +1,15 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../public/styles/comments.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
 <script src="https://kit.fontawesome.com/1b6dbc5d1f.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
 
@@ -11,95 +18,113 @@
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
 <div class="container-fluid padding">
     <style>
-     
-        
-        .news a {
-            background-color: #f5f8fa;
-        }
-        
-        .news a:hover {
-            background-color: #cacfd3;
+       
+        h4,h2,h2,h1,h3{
+             color: #002347;
         }
     </style>
-  
+
     <div class="row">
         <%- include( 'includes/_navbar2') %>
+        <link rel="stylesheet" href="../public/styles/comments.css">
+        <link rel="stylesheet" href="../public/styles/coursal.css">
+        <section class=" col-sm-11 col-md-6 p-5">
 
-            <section class=" col-sm-11 col-md-6 p-5">
-
-                <% for (let doc of docs) { %>
-                    <div id="<%= doc.id %>" class="card" style="width:100%; margin-bottom: 20px;">
-                        <div class="m-2">
-                            <img class="post-logo" style="width: 50px; height: 50px;" src="<%=doc.data().imagePath%>">
-                            <span><%=doc.data().date%></span>
-                        </div>
-                        <img class="card-img-top" src="<%=doc.data().imagePath%>" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <%=doc.data().title%>
-                            </h4>
-                            <p class="card-text">
-                                <%=doc.data().text%>
-                            </p>
-                            <div class="comments-area border m-5" >
-                                <div class="comments" >
-                                <h4 class="p-2"> Comments</h4>
-                                <% if (doc.data().comments.length != 0) { %>
-                                    <% for (comment of doc.data().comments) { %>
-                                        <div class="comment">
-                                            <div class=" media  p-3">
-                                                <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">
-                                                <div class="media-body">
-                                                    <h6>
-                                                        <%=comment.user_name%> <small><i>Posted on <%=comment.date%></i></small></h6>
-                                                    <p>
-                                                        <%=comment.text%>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;"><a href="#" class="p-1">Replay</a></div>
-
-                                        </div>
-                                        <%}%>
-                                            <%}%>
+            <% for (let doc of docs) { %>
+            <div id="<%= doc.id %>" class="card" style="width:100%; margin-bottom: 20px;">
+                <div class="m-2">
+                    <img class="post-logo" style="width: 50px; height: 50px;" src="<%=doc.data().imagePath%>">
+                    <span><%=doc.data().date%></span>
+                </div>
+                <img class="card-img-top" src="<%=doc.data().imagePath%>" alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%=doc.data().title%>
+                    </h4>
+                    <p class="card-text">
+                        <%=doc.data().text%>
+                    </p>
+                    <div class="comments-area border m-5">
+                        <div class="comments">
+                            <h4 class="p-2"> Comments</h4>
+                            <% if (doc.data().comments.length != 0) { %>
+                            <% for (comment of doc.data().comments) { %>
+                            <div class="comment">
+                                <div class=" media  p-3">
+                                    <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 "
+                                        style="width:60px; height: 40px;">
+                                    <div class="media-body">
+                                        <h6>
+                                            <%=comment.user_name%> <small><i>Posted on <%=comment.date%></i></small>
+                                        </h6>
+                                        <p>
+                                            <%=comment.text%>
+                                        </p>
+                                    </div>
                                 </div>
-                                                <hr>
-                                                <form  class="comment-field <%= doc.id %>" onsubmit="event.preventDefault();">
-                                                    <input type="text" placeholder="Write your comment here ..." style="padding-left: 10px;">
-                                                </form>
+
+                                <div
+                                    style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;">
+                                    <a href="#" class="p-1">Replay</a></div>
 
                             </div>
-
-
+                            <%}%>
+                                            <%}%>
                         </div>
+                        <hr>
+                        <form class="comment-field <%= doc.id %>" onsubmit="event.preventDefault();">
+                            <input type="text" placeholder="Write your comment here ..." style="padding-left: 10px;">
+                        </form>
+
                     </div>
-                    <%}%>
+
+
+                </div>
+            </div>
+            <%}%>
 
             </section>
             <section class="news col-sm-12 col-lg-3">
-                <div class="container">
-                    <h2 style="color: black;">News</h2>
-                    <div class="list-group">
+                
+  <div class="container" style="margin-top: 50px;" id="news" >
+    <div class="row justify-content-center" id="news-head">
+      <h2>LATEST NEWS</h2>
+      <p style="margin-top: 5px;">Find out the latest news</p>
+    </div>
 
+    <div class="container my-coursal">
+      
+      <% for (let singelNews of news) { %>
+            <div id="<%= singelNews.id %>" class="row coursal-item">
+                <div class="col-lg-12  item-content">
+                    <h3 class="newsTitle"><%= singelNews.data().title %> <i><%= singelNews.data().date %></i></h3>
+                    <P class="newsText"><%= singelNews.data().text %></P>
 
-                        <% for (news of allNews) {%>
-                            <a href="#" class="numnews list-group-item list-group-item-action">
-                                <%=news.data().content%>
-                            </a>
-                            <%}%>
-
-
-                                <a id="show-more" style=" color:lightseagreen; visibility: hidden;" href="#" class="list-group-item list-group-item-action">Show more</a>
-                    </div>
+                    <a href="#" class="btn btn-default">READ MORE</a>
                 </div>
-            </section>
 
+                <div class="col-lg-12 item-image">
+                    <img class="img-fluid" src="<%= singelNews.data().imagePath %>">
+                </div>
+            </div>
+
+            <% } %>
+            <div class="row coursal-controller">
+                <a id="goBack" class="btn btn-default"><i class="fas fa-long-arrow-alt-left"></i></a>
+                <a id="goNext" class="btn btn-default"><i class="fas fa-long-arrow-alt-right"></i></a>
+            </div>
 
     </div>
+
+
+</div>
+</section>
+
+
+</div>
 </div>
 
-
+<script src="../public/javascripts/customCoursel.js"></script>
 <script>
     var firebaseConfig = {
         apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
@@ -115,10 +140,14 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
     const auth = firebase.auth();
-    console.log(auth.currentUser)
+
     var db = firebase.firestore();
-    var  comment_area_list = $(".comment-field")
-    
+
+    auth.onAuthStateChanged((user) => {
+        console.log(user)
+    })
+    var comment_area_list = $(".comment-field")
+
     //console.log(comments_area_list)
 
     function getTime(date) {
@@ -138,10 +167,10 @@
         return today;
     }
 
-    function addNewComment( post_id, user_name, text) {
+    function addNewComment(post_id, user_name, text) {
         var date = new Date();
         var dateTime = getCurrentDate(date) + ' ' + getTime(date);
-        console.log(post_id +" "+user_name+" "+text)
+        console.log(post_id + " " + user_name + " " + text)
         db.collection('posts').doc(post_id).update({
             comments: firebase.firestore.FieldValue.arrayUnion({
                 user_id: 1,
@@ -152,56 +181,56 @@
         })
     }
 
-    db.collection("posts") .onSnapshot(function(snapshot) {
+    db.collection("posts").onSnapshot(function (snapshot) {
 
-        snapshot.docChanges().forEach(function(change) {
+        snapshot.docChanges().forEach(function (change) {
             if (change.type === "modified") {
-                let doc  = change.doc;
-                let comments =doc.data().comments;  
-                let post = $("#"+doc.id);
+                let doc = change.doc;
+                let comments = doc.data().comments;
+                let post = $("#" + doc.id);
                 let commentsSection = post.find(".comments")
                 commentsSection.children(".comment").remove();
-                post.find(".post-logo").attr("src" , doc.data().imagePath)
-                post.children(".card-img-top").attr("src" , doc.data().imagePath)
-                post.find(".card-title").text( doc.data().title)
+                post.find(".post-logo").attr("src", doc.data().imagePath)
+                post.children(".card-img-top").attr("src", doc.data().imagePath)
+                post.find(".card-title").text(doc.data().title)
                 post.find(".card-text").text(doc.data().text)
-                                                                               
-                for(let comment of comments){
-                    
-                    commentsSection.append('<div class="comment">' +
-                ' <div class=" media  p-3">' +
-                '<img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">' +
-                '<div class="media-body">' +
-                '<h6>'+ comment.user_name +'<small><i> Posted on'+ comment.date + '</i></small></h6>' +
-                '<p>'+ comment.text +'</p></div></div>' +
 
-                '<div style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;"><a href="#" class="p-1">Replay</a></div></div>')
-                }                                                
+                for (let comment of comments) {
+
+                    commentsSection.append('<div class="comment">' +
+                        ' <div class=" media  p-3">' +
+                        '<img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">' +
+                        '<div class="media-body">' +
+                        '<h6>' + comment.user_name + '<small><i> Posted on' + comment.date + '</i></small></h6>' +
+                        '<p>' + comment.text + '</p></div></div>' +
+
+                        '<div style="text-align: right; color: rgb(28, 92, 211); clear: both; margin-bottom: 10px ;"><a href="#" class="p-1">Replay</a></div></div>')
+                }
             }
         });
     });
 
-    for ( let field of comment_area_list){
+    for (let field of comment_area_list) {
         field.addEventListener('submit', () => {
-            
+
             let textField = field.getElementsByTagName("input")[0]
             addNewComment(field.classList[1], "khaled", textField.value);
             textField.value = "";
         })
     }
 /*
-    for (comment_area of comments_area_list) {
-        let comment_field = comment_area.querySelector(".comment-field");
-        let commentArea = comment_area
-        let commentAreaId = commentArea.getElementsByClassName("comments")[0].id;
-        comment_field.addEventListener('submit', () => {
-            let textField = comment_field.getElementsByTagName("input")[0]
-            addNewComment(commentArea, commentAreaId, "khaled", textField.value);
-            textField.value = "";
-
-        })
-    }
-    */
+        for (comment_area of comments_area_list) {
+            let comment_field = comment_area.querySelector(".comment-field");
+            let commentArea = comment_area
+            let commentAreaId = commentArea.getElementsByClassName("comments")[0].id;
+            comment_field.addEventListener('submit', () => {
+                let textField = comment_field.getElementsByTagName("input")[0]
+                addNewComment(commentArea, commentAreaId, "khaled", textField.value);
+                textField.value = "";
+    
+            })
+        }
+        */
 </script>
 
 

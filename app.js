@@ -3,8 +3,19 @@ const app =  express();
 const path = require("path")
 const bodyParser = require('body-parser');
 var admin = require("firebase-admin");
-
+var firebase =  require("firebase");
 var serviceAccount = require("./ServiceAccount.json");
+
+firebase.initializeApp({
+  apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
+  authDomain: "university-45734.firebaseapp.com",
+  databaseURL: "https://university-45734.firebaseio.com",
+  projectId: "university-45734",
+  storageBucket: "university-45734.appspot.com",
+  messagingSenderId: "694823147172",
+  appId: "1:694823147172:web:970f883121c3e21ba3f831",
+  measurementId: "G-F24T378RP7"
+})
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

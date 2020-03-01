@@ -43,7 +43,7 @@
                           </label>
 
                         </div>
-                        <div id="submitBtn" style="text-align: center;"><button type="submit" class="btn btn-primary" id="btlogin">Submit</button></div>
+                        <div id="logBtn" style="text-align: center;"><button type="submit" class="btn btn-primary" id="btlogin">Submit</button></div>
 
                     </form>
 
@@ -74,21 +74,40 @@
                             <input type="password" class="form-control myform" id="confirm" name="signupconfirm">
                             <div class="dis" id="confirmDis"></div>
                         </div>
-                        <button onclick="window.location.href = '/signin/google'" > signup wwith google</button>
-                        <div id="submitBtn" style="text-align: center;"><button type="submit" class="btn btn-primary">Submit</button></div>
+                        
+                        <div id="signupBtn" style="text-align: center;"><button type="submit" class="btn btn-primary">Submit</button></div>
 
                     </form>
                 </div>
 
             </div>
         </div>
-		
+		<script>
+             var firebaseConfig = {
+                apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
+                authDomain: "university-45734.firebaseapp.com",
+                databaseURL: "https://university-45734.firebaseio.com",
+                projectId: "university-45734",
+                storageBucket: "university-45734.appspot.com",
+                messagingSenderId: "694823147172",
+                appId: "1:694823147172:web:970f883121c3e21ba3f831",
+                measurementId: "G-F24T378RP7"
+            };
+    
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+            const auth = firebase.auth();
+            auth.onAuthStateChanged( (user) =>{
+                 if(user)
+                 window.location.href = "/posts"
+                })
+
+        </script>
         <script src="../public/javascripts/validation.js"></script>
         <script>
             var toLogin = document.getElementById("toLogin")
             var toSignup = document.getElementById("toSignup")
-            var loginForm = document.getElementById("loginForm")
-            var signupForm = document.getElementById("signupForm")
+           
             var motion = document.getElementById("motion")
             
             toSignup.addEventListener("click", () => {
