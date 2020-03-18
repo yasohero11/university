@@ -100,10 +100,13 @@ h4,h2,h2,h1,h3, i{
     border-top-right-radius:5px ;
     width: 300px;
     height: 350px;
-    margin-top: 50px;
     position: relative; 
     box-shadow: 0 0 10px rgb(0,0,0,0.5);
+    margin: auto;
+    margin-top: 50px;
+   margin-bottom: 20px;
 }
+
 .professor img{
     width: 70px;
     height: 70px;
@@ -140,6 +143,7 @@ h4,h2,h2,h1,h3, i{
 }
 .partners{
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 .partners img{
     margin-top: 50px;
@@ -152,6 +156,20 @@ h4,h2,h2,h1,h3, i{
     margin: auto;
 }
 
+.owl-nav i {
+    width: 30px;
+    height: 30px ;
+    box-sizing: border-box;
+    padding-top: 5.5px;
+    font-size: 20px;
+   
+   
+}
+
+.owl-nav *{
+   border-radius: 100% !important;
+  
+}
 
 
 

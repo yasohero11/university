@@ -2,17 +2,26 @@
 <script src="https://kit.fontawesome.com/1b6dbc5d1f.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
     <link rel="stylesheet" href="../../public/styles/navBarStyle.css">
 
+
+    <style>
+      li:hover {
+        cursor: pointer;
+      }
+    </style>
 <nav id="mynav" class="navbar navbar-expand-md bg-white navbar-light  ">
     <div class="container justifiy-contetnt-center">
-      <a class="navbar-brand " id="show-on-col" href="#"><img
+      <a class="navbar-brand " id="show-on-col" href="/"><img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgSGlbBKEoANTc10zgf93S957hwYB3vpbwC-0aslgB-X6jZ79V"></a>
 
       <!-- Toggler/collapsibe Button -->
@@ -24,27 +33,27 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar" style="justify-content: center;">
         <ul class="navbar-nav ">
           <li class="nav-item nav-it">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" onclick="window.location.href = '../'">Home</a>
           </li>
           <li class="nav-item nav-it">
-            <a class="nav-link" href="#">Faculties</a>
+            <a class="nav-link" onclick="window.location.href = '../departments'">Faculties</a>
           </li>
           <li class="nav-item nav-it">
             <a class="nav-link" href="#">Student Activites</a>
           </li>
 
           <li class="nav-item" id="hide-on-col">
-            <a class=" navbar-brand" href="#"><img
+            <a class=" navbar-brand" href="/"><img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgSGlbBKEoANTc10zgf93S957hwYB3vpbwC-0aslgB-X6jZ79V"></a>
           </li>
           <li class="nav-item nav-it">
-            <a class="nav-link" href="#">Partnership</a>
+            <a class="nav-link" onclick="window.location.href = '../about_us'">About Us</a>
           </li>
           <li class="nav-item nav-it">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link"  onclick="window.location.href = '../contact_us'">Contact Us</a>
           </li>
           <li class="nav-item nav-it">
-            <a class="nav-link" href="#">Contact Us</a>
+            <a   id="login" class="nav-link" >login</a>
           </li>
 
         </ul>
@@ -53,23 +62,21 @@
   </nav>
 
   <script>
-       $(document).ready(() => {
-                $(window).resize(function () {
-                if (($(window).width() <= 766)) {
-                $("#show-on-col").show();
-                $("#hide-on-col").hide();
-                } else {
-                $("#show-on-col").hide();
-                $("#hide-on-col").show();
-                }
-            });
-
-            $(window).scroll(() => {
-                if ($(window).scrollTop() > 50) {
-                $("#mynav").addClass("sticky-top")
-                } else {
-                $("#mynav").removeClass("sticky-top")
-                }
-            })  
-       })
+     var firebaseConfig = {
+                apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
+                authDomain: "university-45734.firebaseapp.com",
+                databaseURL: "https://university-45734.firebaseio.com",
+                projectId: "university-45734",
+                storageBucket: "university-45734.appspot.com",
+                messagingSenderId: "694823147172",
+                appId: "1:694823147172:web:970f883121c3e21ba3f831",
+                measurementId: "G-F24T378RP7"
+            };
+    
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+            const auth = firebase.auth();
+            const provider = new firebase.auth.GoogleAuthProvider();
+            var db = firebase.firestore();
+      
   </script>

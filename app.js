@@ -31,6 +31,8 @@ app.use(require("./routes/index"));
 app.use(require("./routes/posts"));
 app.use(require("./routes/admin"));
 app.use(require('./routes/signup'));
+app.use(require('./routes/departments'));
+app.use(require('./routes/news'));
 
 /*  access a subcollection
 db.collection("posts").doc("EEjdmoOPlOfcyryBVaSO").collection('comments').get().then((doc)=>{

@@ -1,0 +1,221 @@
+.news{
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    white-space: normal;                               
+}
+p{
+    color: #bdbdbd;
+    font-size: 20px;
+}
+#nes p {
+    background-color: yellow;
+}
+#coursal{
+    transition: 0.5s;
+    /*transform: translate(-320px);*/
+    width: fit-content;
+}
+
+h4,h2,h2,h1,h3, i{
+    color: #002347;
+}
+i{
+    font-size: 30px;
+}
+.container-fluid{
+    padding: 0px;
+    
+    overflow: hidden;
+}
+.newsHead{
+    background: linear-gradient(to right, #93291e,#ed213a);
+}
+.newsInfo div * {                        
+    display: inline-block;            
+    vertical-align: middle;
+}
+.newsInfo div p {                        
+  height: fit-content;          
+  margin-bottom: 5px;
+  margin-left: 7px;
+}
+.newsInfo div{
+    margin-top: 10px;
+}
+.newsInfo{
+    padding-left: 50px;
+}
+.newsContent{
+    background: linear-gradient(to bottom right, #485563, #29323c);
+    width: 100%;
+    
+}
+.newsContent div {
+    max-width: 800px; 
+    margin: auto;
+    padding: 30px;
+}
+/* .newsContent *{
+    margin: auto;
+    justify-content: center;
+}
+*/
+.newsContent h2{
+    
+    margin: 0px;
+}
+.newsContent hr{
+   width: 200px;
+   background-color: #93291e;
+   float: left;
+   margin-top: 5px;
+} 
+.newsContent p{
+    clear: both;
+    font-size: 25px;
+}
+@keyframes item-content{
+from{
+opacity: 0;
+
+}
+to{
+opacity: 1;
+
+}
+}
+@keyframes item-image{
+from{
+opacity: 0;
+transform: translateX(100px);
+}
+to{
+opacity: 1;
+transform: none;
+}
+}
+@keyframes moveLeft{
+    from{
+        
+        transform: none;
+    }
+    to{
+        transform: translateX(-20px);
+        
+    }  
+}
+@keyframes moveRight{
+    from{
+        transform: translateX(-20px);
+        
+    }
+    to{
+        transform: none;
+    }  
+}
+@keyframes fadeIn{
+    from{
+        visibility: hidden;
+        opacity: 0;
+    }
+    to{
+        visibility: visible;
+        opacity: 1;
+    }
+
+}
+@keyframes fadeOut{
+    from{
+        visibility: visible;
+        opacity: 1;   
+    }
+    to{
+     
+        visibility: hidden;
+        opacity: 0;
+    }
+
+}
+
+
+.active img {
+animation-duration: 2s;
+animation-name: item-content;
+animation-fill-mode: both;
+
+}
+.active .newsContent{
+animation-delay: 1s;
+animation-duration: 2s;
+animation-name: item-content;
+animation-fill-mode: both;
+}
+.active .newsTitle{
+animation-delay: 1s;
+animation-duration: 1.8s;
+animation-name: item-image;
+animation-fill-mode: both;
+}
+.active .newsDate{
+animation-delay: 1.19s;
+animation-duration: 1.6s;
+animation-name: item-image;
+animation-fill-mode: both;
+}
+.active .newsVistes{
+animation-delay: 1.29s;
+animation-duration: 1.6s;
+animation-name: item-image;
+animation-fill-mode: both;
+}
+
+button{
+    
+    margin: 0px 5px;
+    padding: 0px;
+    border: none;
+    background: transparent;
+   
+}
+button p {
+    animation-duration:0.5s;
+    animation-name: fadeOut;
+    animation-fill-mode: both;
+}
+button:first-child i{
+    animation-duration: 1s;
+    animation-name: moveRight;
+    animation-fill-mode: both;
+}
+button:first-child:hover i{
+    animation-duration: 1s;
+    animation-name: moveLeft;
+    animation-fill-mode: both;
+   
+}
+
+button:last-child i{
+    animation-duration: 1s;
+    animation-name: moveLeft;
+    animation-fill-mode: both;
+}
+button:last-child:hover i{
+    animation-duration: 1s;
+    animation-name: moveRight;
+    animation-fill-mode: both;
+}
+button:hover p {  
+    animation-duration:0.5s;
+    animation-name: fadeIn;
+    animation-fill-mode: both;
+}
+button *{
+    display: inline;
+}
+
+
+footer{
+    margin-bottom: 15px;
+    
+  }

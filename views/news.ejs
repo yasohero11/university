@@ -1,0 +1,93 @@
+<html lang="en">
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<%- include( 'includes/_navbar') %>
+<link rel="stylesheet" href="../public/styles/news.css">
+<div class="container-fluid my-coursal">
+    <% for (let singelNews of news) { %>
+    <div id="<%= singelNews.id %>" class="container-fluid newsHead coursal-item <%= singelNews.id == selectedNews ? 'active' : '' %>" >
+        <div class="row" style="width: 100%; margin: 0px; padding: 0px;">
+            <div class="col-md-6" style="  padding: 0px;"> 
+                <img class="img-fluid"
+                    src="<%= singelNews.data().imagePath %>">
+            </div>
+            <div class="newsInfo" class="col-md-6" >
+                <h2 class="newsTitle" class="display-4"><%= singelNews.data().title %> </h2>
+                <div class="newsDate"><i class="far fa-clock"></i>
+                    <p> <%= singelNews.data().date %></p>
+                </div>
+                <div class="newsVistes">
+                    <i class="far fa-eye"></i>
+                    <p><%= (parseInt(singelNews.data().vistesCount)) %></p>
+                </div>
+            </div>
+            <div class="newsContent" >
+                <div>
+                    <h2>News</h2>
+                    <hr>
+                    <p><%= singelNews.data().text %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+</div>
+
+
+
+
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom justify-content-center">
+    <button id="goBack"><i class="fas fa-long-arrow-alt-left"></i>
+        <P> PREVUSE</P>
+    </button>
+    <button id="goNext">
+        <P>NEXT </P><i class="fas fa-long-arrow-alt-right"></i>
+    </button>
+</nav>
+
+
+
+
+<%- include( 'includes/_footer') %>
+
+<style>
+    footer{
+        margin-top: 0px;
+    }
+</style>
+
+<script src="../public/javascripts/customCoursel.js"></script>
+<script>
+    incrementVsites();
+     
+     function update(id, number ){
+        db.collection("news").doc(id).update({
+            vistesCount: number
+          }) 
+     }
+    function incrementVsites(){
+        let currrentNews = $(".active")            
+        if(!currrentNews.hasClass("vsited")){
+            var newNumber= parseInt($(".active .newsVistes p").text())+1;
+            $(".active .newsVistes p").text(newNumber)            
+            update(currrentNews.attr("id"), newNumber)
+            currrentNews.addClass("vsited");
+        }
+    }
+    $(document).ready(()=>{
+        $("#goNext").click(() =>{
+            incrementVsites() 
+        })
+        $("#goBack").click(() => {
+            incrementVsites()
+        })
+    })
+</script>

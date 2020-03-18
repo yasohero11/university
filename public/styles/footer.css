@@ -1,0 +1,51 @@
+footer{
+    background:#283E51;
+    margin-top: 20px ;
+}
+
+p{
+    font-size: 15px;
+}
+i{
+    font-size: 20px;
+}
+
+h5{
+    color: rgb(24, 24, 24);
+}
+
+.followus a{
+        
+        display: block;
+        margin: 10px auto;
+        width: 40px;
+        height: 40px;
+        border-radius:20px ;
+       
+}
+.followus i{
+    margin-top: 10.5px;
+    margin-right: 0px;
+    color: aliceblue;
+}
+#facebook{
+    background: #3b5998;
+}
+#twitter{
+    background: #55acee;
+}
+#google{
+    background: #dd4b39;
+}
+#ball{
+    background: #ec4a89;
+}
+.list-unstyled a{
+    text-decoration: none;
+    color: #55acee;
+}
+.list-unstyled a:hover{
+ 
+    color: #ec4a89;
+    
+}

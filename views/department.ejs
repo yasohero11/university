@@ -1,0 +1,188 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<style>
+    img{
+        width: 100%;
+        height: 300px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    #dep{
+        border: rgb(131, 131, 131) solid 2px;
+        margin-top: 30px;
+        border-radius: 12px;
+        padding: 0px;
+    }
+    h2{
+        width: 100%;
+        background: linear-gradient(to right, #11998e, #38ef7d);
+        margin: 0px;
+        padding: 0px;
+        height: 100px;
+        box-sizing: border-box;
+        padding: 5px 0px 0px 10px ;
+    }
+    h3{
+        margin: auto;
+        width: fit-content
+    }
+    hr{
+        width: 400px;
+    }
+    .semester{
+        padding: 20px;
+    }
+    p{
+        margin: auto;
+        width: fit-content;
+        max-width: 900px;
+        color: #7b838a;
+        font-size: 20px;
+        padding: 20px;
+    }
+
+   
+</style>
+
+
+
+
+<%- include( 'includes/_navbar') %>
+
+<div class="container" id="dep">
+    <div class="row" style="padding: 0px; margin: 0px;">
+            <img src="<%= dep.imagePath%>" >
+    </div>
+    <h2 class="display-4"><%= dep.title%></h2>
+    <h3 class="display-3">Description</h3>
+    <hr>
+    <p><%= dep.text%></p>
+        
+    
+
+ 
+    <div class="semester">
+        <h4>Semester 1</h4>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>                
+                <th scope="col">Name</th>
+                <th scope="col">Numbers Of Hours</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+            </table>
+
+    </div>
+    <div class="semester">
+        <h4>Semester 1</h4>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>                
+                <th scope="col">Name</th>
+                <th scope="col">Numbers Of Hours</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+            </table>
+
+    </div>
+    <div class="semester">
+        <h4>Semester 1</h4>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>                
+                <th scope="col">Name</th>
+                <th scope="col">Numbers Of Hours</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+              <tr>
+                <th scope="row">Programmiong 1</th>
+                <td>4.0</td>
+                <td>2gabry</td>                
+              </tr>
+            </table>
+
+    
+        
+
+    </div>
+</div>
+<%- include( 'includes/_footer') %>
+

@@ -344,6 +344,7 @@
                 title: news.children("#title").val(),
                 text: news.children("#text").val(),
                 imagePath: news.children("#imageUrl").val(),
+                vistesCount :0
             }).then((doc) =>{
                 resetForms(news);
                 console.log(doc.id + " a news been added to the database")

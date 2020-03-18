@@ -47,12 +47,12 @@
     padding-top: 50px;
 }
 
-.card a{
+.card button{
     border-radius:0px ;
     color: aliceblue;
     background: #002347;
 }
-.card a:hover{
+.card button:hover{
  color: #fdc632;
 }
 .card:hover{

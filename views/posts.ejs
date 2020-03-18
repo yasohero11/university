@@ -1,3 +1,7 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -49,10 +53,10 @@
                             <h4 class="p-2"> Comments</h4>
                             <% if (doc.data().comments.length != 0) { %>
                             <% for (comment of doc.data().comments) { %>
-                            <div class="comment">
+                            <div class="comment" >
                                 <div class=" media  p-3">
-                                    <img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 "
-                                        style="width:60px; height: 40px;">
+                                    <img src="<%= comment.userIcon %>" alt="John Doe" class="mr-2"
+                                        style="width:60px; height: 60px;">
                                     <div class="media-body">
                                         <h6>
                                             <%=comment.user_name%> <small><i>Posted on <%=comment.date%></i></small>
@@ -140,13 +144,22 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
     const auth = firebase.auth();
+    var currentUser ;
+    var comment_area_list = $(".comment-field")
 
     var db = firebase.firestore();
 
     auth.onAuthStateChanged((user) => {
-        console.log(user)
+        if(user){
+            currentUser = user
+            console.log(currentUser)
+        }else
+            window.location.href = "/"
     })
-    var comment_area_list = $(".comment-field")
+  
+   document.getElementById("logout").addEventListener("click", ()=>{
+    auth.signOut().then(()=>{window.location.href = "/"})
+   }) 
 
     //console.log(comments_area_list)
 
@@ -167,18 +180,25 @@
         return today;
     }
 
-    function addNewComment(post_id, user_name, text) {
+    function addNewComment(post_id, user, text) {
         var date = new Date();
         var dateTime = getCurrentDate(date) + ' ' + getTime(date);
-        console.log(post_id + " " + user_name + " " + text)
+        console.log(post_id + " " +  + " " + text)
         db.collection('posts').doc(post_id).update({
             comments: firebase.firestore.FieldValue.arrayUnion({
                 user_id: 1,
-                user_name: user_name,
+                user_name:truncate(user.displayName,2) ,
                 date: dateTime,
-                text: text
+                text: text,
+                userIcon:user.photoURL 
             })
+        }).catch( (err)=>{
+            console.log("err")
+            console.log(err);
         })
+    }
+    function truncate(str, no_words) {
+        return str.split(" ").splice(0,no_words).join(" ");
     }
 
     db.collection("posts").onSnapshot(function (snapshot) {
@@ -199,7 +219,7 @@
 
                     commentsSection.append('<div class="comment">' +
                         ' <div class=" media  p-3">' +
-                        '<img src="../public/assets/tree.webp" alt="John Doe" class="mr-2 mt-2 " style="width:60px; height: 40px;">' +
+                        '<img src="'+ comment.userIcon +'" alt="John Doe" class="mr-2  " style="width:60px; height: 60px;">' +
                         '<div class="media-body">' +
                         '<h6>' + comment.user_name + '<small><i> Posted on' + comment.date + '</i></small></h6>' +
                         '<p>' + comment.text + '</p></div></div>' +
@@ -212,9 +232,8 @@
 
     for (let field of comment_area_list) {
         field.addEventListener('submit', () => {
-
             let textField = field.getElementsByTagName("input")[0]
-            addNewComment(field.classList[1], "khaled", textField.value);
+            addNewComment(field.classList[1], currentUser, textField.value);
             textField.value = "";
         })
     }
@@ -234,18 +253,6 @@
 </script>
 
 
-
-
-<script>
-    var news = document.getElementsByClassName("numnews");
-    console.log(news.length);
-    if (news.length >= 8) {
-        document.getElementById("show-more").style.visibility = "visible";
-        for (var i = 7; i < news.length; i++) {
-            news[i].parentNode.removeChild(news[i]);
-        }
-    }
-</script>
 
 <!--
      <div class="comment">

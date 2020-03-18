@@ -1,5 +1,5 @@
 
-.coursal-item a{
+.coursal-item button{
     background-color: #002347;
     color: #fdc632;
     width: 150px;
@@ -7,6 +7,7 @@
     border-radius: 25px;  
     margin-top: 50px;
     margin-bottom: 20px;  
+    border: none;
 }
 .coursal-item a:hover{
     color: #fdc632;
@@ -34,10 +35,7 @@
 }
 
 .my-coursal{
-    
     overflow: hidden;
-    
-    
 }
 #news{
     background: linear-gradient(to right, #ff4b2b,#ff416c);;
@@ -84,7 +82,7 @@
     animation-name: item-image;
     animation-fill-mode: both;
 }
-.active .item-content a{
+.active .item-content button{
     animation-delay: 0.2s;
     animation-duration: 1.4s;
     animation-name: item-content;

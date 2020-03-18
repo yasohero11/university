@@ -9,18 +9,26 @@
   
 
   <%- include( 'includes/_navbar') %>
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
-
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-       https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+  
  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
   <link rel="stylesheet" href="../public/styles/index.css">
   <link rel="stylesheet" href="../public/styles/coursal.css">
   <link rel="stylesheet" href="../public/styles/facultiesCards.css">
- 
+  <link rel="stylesheet" href="../public/styles/owl.carousel.min.css">
+  <link rel="stylesheet" href="../public/styles/owl.theme.default.min.css">
+    <style>
+    .professor img{
+        
+        height: 70px;
+        position: absolute;
+        top: -50px;
+        left: 115px;
+        border-radius: 100%;
+        box-shadow: 0 0 10px rgb(0,0,0,0.5);
+    }
+    </style>
 
   <div class="container-fluid" id="education">
     <div class="col-md-12">
@@ -30,8 +38,8 @@
     <div class="container">
       <h4>BEST EDUCATION SERVICE IN THE EGYPT</h4>
       <h2 class="display-1">ONE STEP AHEAD THIS SEASON</h2>
-      <button id="learn-more" type="button" class="btn btn-outline-success">LERN MORE</button>
-      <button id="fu" type="button" class="btn btn-default">FACULTIES</button>
+      <button onclick="window.location.href = '../about_us'" id="learn-more" type="button" class="btn btn-outline-success">LERN MORE</button>
+      <button onclick="window.location.href = '../faculties'" id="fu" type="button" class="btn-floating btn btn-default">FACULTIES</button>
     </div>
   </div>
 
@@ -82,7 +90,7 @@
           <div class="card-body">
             <h4 class="card-title"><%= department.data().title %></h4>
             <p class="card-text"><%= department.data().text %></p>
-            <a href="#" onclick="window.location.href = '../departments/<%=department.id %>'" class="btn btn-default">READ MORE</a>
+            <button onclick="window.location.href = '../departments/<%=department.id %>'" class="btn btn-default">READ MORE</button>
           </div>
         </div>
       </div>
@@ -103,9 +111,8 @@
         <div id="<%= singelNews.id %>" class="row coursal-item">
           <div  class="col-lg-6  item-content">
             <h3 class="newsTitle"><%= singelNews.data().title %> <i><%= singelNews.data().date %></i></h3>
-            <P class="newsText"><%= singelNews.data().text %></P>
-            
-            <a href="#" class="btn btn-default">READ MORE</a>
+            <P class="newsText"><%= singelNews.data().text %></P>            
+            <button  onclick="window.location.href = '../news/<%=singelNews.id %>'" class="btn" >READ MORE</button>
           </div>
 
           <div class="col-lg-6 item-image">
@@ -125,7 +132,7 @@
   </div>
   
   
-  <div class="container ">
+  <!-- <div class="container ">
     <div class="row">
       <% for (let professor of professors) { %>
           <div class="professor" style="border-top: 10px solid <%= 'rgb(' + (Math.floor((Math.random() * 253) + 1)) +','+ (Math.floor((Math.random() * 253) + 1))+ ','+ (Math.floor((Math.random() * 253) + 1)) +')' %>;">
@@ -143,7 +150,29 @@
 
     </div>
 
+</div> -->
+
+<div class="container" style="padding: 0px;">
+  <div id="testimonial-slider" class="owl-carousel owl-theme">
+    <% for (let professor of professors) { %>
+      <div class="item">
+        <div class="professor" style="border-top: 10px solid <%= 'rgb(' + (Math.floor((Math.random() * 253) + 1)) +','+ (Math.floor((Math.random() * 253) + 1))+ ','+ (Math.floor((Math.random() * 253) + 1)) +')' %>;">
+          <img src="<%= professor.data().imageUrl %>" style="width: 70px;">
+            <h6><%= professor.data().name %></h6>
+            <hr>
+            <p><%= professor.data().description %></p>
+            <div class="societal">
+              <a href="<%= professor.data().twitter %>"><i class="fab fa-twitter"></i></a>
+              <a href="<%= professor.data().mail %>"><i class="fas fa-paper-plane"></i></a>
+              <a href="<%= professor.data().linkedin %>"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+      </div>
+      <% } %> 
+  </div> 
 </div>
+  
+  
 
 <div class="container partners">
   <div class="row">
@@ -205,11 +234,14 @@
 </div> -->
 
 
+<%- include( 'includes/_footer') %>
+
 
   <script src="../public/javascripts/customCoursel.js"></script>
+  <script src="../public/javascripts/owl.carousel.min.js"></script>
   <script>
-   
-     var firebaseConfig = {
+    autoPlay(6000)
+ /*     var firebaseConfig = {
         apiKey: "AIzaSyDLSerwfjmloXdFHOKiTwUvc0LdLgSAPQs",
         authDomain: "university-45734.firebaseapp.com",
         databaseURL: "https://university-45734.firebaseio.com",
@@ -222,8 +254,8 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-    const auth = firebase.auth();
-    var db = firebase.firestore();
+    const auth = firebase.auth();  */
+    //var db = firebase.firestore();
     
 /*
     auth.onAuthStateChanged( (user) =>{
@@ -236,10 +268,9 @@
     */
     //auth.signOut()
 
-    console.log(auth.currentUser)
-    $(document).ready(() => {
-
-        for (element of $(".card-text")){
+    
+    function shortText(className){
+      for (element of $(className)){
             let words =  element.innerHTML.split(" ")
             let text = ""            
            if(words.length >= 20){ 
@@ -249,6 +280,36 @@
             element.innerHTML = text + " ...."
            }
         }
+    }
+    $(document).ready(() => {
+        
+        shortText(".card-text")
+        shortText(".newsText")
+        
+        $("#testimonial-slider").owlCarousel({
+         loop:true,
+         margin:20,
+         responsiveClass:true,
+         navText: ['<i class="fas fa-chevron-circle-left"></i>','<i class="fas fa-chevron-circle-right"></i>'],
+         nav:true,                  
+         responsive:{
+            760:{
+                items:2,
+                nav:true   
+            },
+            0:{
+                items:1,
+                nav:true
+            },
+            1000:{
+                items:3,
+                nav:true,
+                loop:false
+            }
+         } 
+
+      
+        });
     
 
     db.collection("news") .onSnapshot(function(snapshot) {
